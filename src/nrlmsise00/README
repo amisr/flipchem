@@ -1,0 +1,5 @@
+A python wrapper was made for the C version of NRLMSISe-00.
+
+
+The wrapper was made using SWIG, with the following command:
+    swig -python -o _swigmsis_wrap.c swigmsis.i
