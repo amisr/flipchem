@@ -3,7 +3,7 @@ flipchem
 
 Overview
 --------
-`flipchem` provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards [RICH2011]. The model requires NRLMSIS-00 neutral density and the f107 f107a and AP geophysical parameters as inputs, so both of these have been packaged with `flipchem`. NRLMSIS-00 is provided by wrapping the C version of the code written by Dominik Brodowski, which is based on the original Fortran version of the model [PICO2002].
+`flipchem` provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards [Richards (2011)]_. The model requires NRLMSIS-00 neutral density and the f107 f107a and AP geophysical parameters as inputs, so both of these have been packaged with `flipchem`. NRLMSIS-00 is provided by wrapping the C version of the code written by Dominik Brodowski, which is based on the original Fortran version of the model [Picone et al. (2002)]_.
 
 Use Case
 --------
@@ -20,9 +20,9 @@ This facilitates usage of the multiprocessing library when processing ISR data, 
 Installation
 ------------
 
-Since this package is a wrapper around both C and Fortran source code, one must install `numpy <https://numpy.readthedocs.io/en/latest/>`_ before attempting installation. `Numpy` is used during installation of `flipchem` to compile the Fortran [NUMP2006]. 
+Since this package is a wrapper around both C and Fortran source code, one must install `numpy <https://numpy.readthedocs.io/en/latest/>`_ before attempting installation. `Numpy` is used during installation of `flipchem` to compile the Fortran [Oliphant (2006)]_. 
 
-Installation of `flipchem` can be accomplished using `pip`:
+Installation of `flipchem` can be accomplished using `pip`::
 
     pip install git+https://github.com/amisr/flipchem.git@v2020.0.9
 
@@ -30,19 +30,19 @@ Installation of `flipchem` can be accomplished using `pip`:
 Example Usage
 -------------
 
-First, it is very important to update the geophysical parameters files. There is an archive of these files available at `<https://amisr.com/geophys_params/>`_. They are organized by year, so once updated, you only need to update the current year. To update all years:
+First, it is very important to update the geophysical parameters files. There is an archive of these files available at `<https://amisr.com/geophys_params/>`_. They are organized by year, so once updated, you only need to update the current year. To update all years::
 
     import flipchem
     flipchem.update_geophys(year='all')
 
 
-and to update a specific year, say 1991:
+and to update a specific year, say 1991::
 
     import flipchem
     flipchem.update_geophys(year=1991)
 
 
-Get the O+, O2+, NO+, N2+, and N+ ion densities at 130km above the RISR-N ISR:
+Get the O+, O2+, NO+, N2+, and N+ ion densities at 130km above the RISR-N ISR::
 
     from datetime import datetime
     from flipchem import Flipchem
@@ -59,7 +59,7 @@ Get the O+, O2+, NO+, N2+, and N+ ion densities at 130km above the RISR-N ISR:
     lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,success = outputs
 
 
-Or, we can get the ion fractions instead by replacing the last 2 lines with:
+Or, we can get the ion fractions instead by replacing the last 2 lines with::
 
     outputs = fc.get_point_fractions(glat,glon,alt,ne,te,ti)
     lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,success = outputs
@@ -79,7 +79,7 @@ One can also access MSIS directly:
     outputs = msis.get_point(glat,glon,alt)
     He,O,N2,O2,Ar,Mass,H,N,AnomO,Texo,Tn = outputs
 
-And one can also access the f107, f107a, and AP:
+And one can also access the f107, f107a, and AP::
 
     from datetime import datetime
     import flipchem
@@ -87,7 +87,7 @@ And one can also access the f107, f107a, and AP:
     f107, f107a, ap = flipchem.read_geophys(datetime(2017,1,4,2))
 
 
-And there is code available with the MSIS wrapper that provides ion-neutral and electron-neutral collision frequencies:
+And there is code available with the MSIS wrapper that provides ion-neutral and electron-neutral collision frequencies::
 
     from flipchem import MSIS
     from flipchem import compute_ion_neutral_collfreq
@@ -103,7 +103,6 @@ And there is code available with the MSIS wrapper that provides ion-neutral and 
     outputs = msis.get_point(glat,glon,alt)
     He,O,N2,O2,Ar,Mass,H,N,AnomO,Texo,Tn = outputs
     
-
     # N+, O+, N2+, NO+, O2+
     ion_masses = [14.0,16.0,28.0,30.0,32.0]
     Te = Ti = 1000.0
