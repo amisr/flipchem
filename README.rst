@@ -114,6 +114,6 @@ And there is code available with the MSIS wrapper that provides ion-neutral and 
 
 
 
-.. [NUMP2006] Oliphant, T. E. (2006). A guide to NumPy (Vol. 1). Trelgol Publishing USA.
-.. [PICO2002] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002). NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons and scientific issues, J. Geophys. Res., 107(A12), 1468, doi:10.1029/2002JA009430. 
-.. [RICH2011] Richards, P. G. (2011). Reexamination of ionospheric photochemistry, J. Geophys. Res., 116, A08307, doi:10.1029/2011JA016613.
+.. [Oliphant (2006)] Oliphant, T. E. (2006). A guide to NumPy (Vol. 1). Trelgol Publishing USA.
+.. [Picone et al. (2002)] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002). NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons and scientific issues, J. Geophys. Res., 107(A12), 1468, doi:10.1029/2002JA009430. 
+.. [Richards (2011)] Richards, P. G. (2011). Reexamination of ionospheric photochemistry, J. Geophys. Res., 116, A08307, doi:10.1029/2011JA016613.
