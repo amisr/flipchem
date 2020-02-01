@@ -3,7 +3,7 @@ flipchem
 
 Overview
 --------
-`flipchem` provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards [Richards (2011)]_. The model requires NRLMSIS-00 neutral density and the f107 f107a and AP geophysical parameters as inputs, so both of these have been packaged with `flipchem`. NRLMSIS-00 is provided by wrapping the C version of the code written by Dominik Brodowski, which is based on the original Fortran version of the model [Picone et al. (2002)]_.
+`flipchem` provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards [Richards2011]_. The model requires NRLMSIS-00 neutral density and the f107 f107a and AP geophysical parameters as inputs, so both of these have been packaged with `flipchem`. NRLMSIS-00 is provided by wrapping the C version of the code written by Dominik Brodowski, which is based on the original Fortran version of the model [Picone2002]_.
 
 Use Case
 --------
@@ -20,7 +20,7 @@ This facilitates usage of the multiprocessing library when processing ISR data, 
 Installation
 ------------
 
-Since this package is a wrapper around both C and Fortran source code, one must install `numpy <https://numpy.readthedocs.io/en/latest/>`_ before attempting installation. `Numpy` is used during installation of `flipchem` to compile the Fortran [Oliphant (2006)]_. 
+Since this package is a wrapper around both C and Fortran source code, one must install `numpy <https://numpy.readthedocs.io/en/latest/>`_ before attempting installation. `Numpy` is used during installation of `flipchem` to compile the Fortran [Oliphant2006]_. 
 
 Installation of `flipchem` can be accomplished using `pip`::
 
@@ -65,7 +65,7 @@ Or, we can get the ion fractions instead by replacing the last 2 lines with::
     lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,success = outputs
 
 
-One can also access MSIS directly:
+One can also access MSIS directly::
 
     from flipchem import MSIS
     from datetime import datetime
@@ -114,6 +114,6 @@ And there is code available with the MSIS wrapper that provides ion-neutral and 
 
 
 
-.. [Oliphant (2006)] Oliphant, T. E. (2006). A guide to NumPy (Vol. 1). Trelgol Publishing USA.
-.. [Picone et al. (2002)] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002). NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons and scientific issues, J. Geophys. Res., 107(A12), 1468, doi:10.1029/2002JA009430. 
-.. [Richards (2011)] Richards, P. G. (2011). Reexamination of ionospheric photochemistry, J. Geophys. Res., 116, A08307, doi:10.1029/2011JA016613.
+.. [Oliphant2006] Oliphant, T. E. (2006). A guide to NumPy (Vol. 1). Trelgol Publishing USA.
+.. [Picone2002] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002). NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons and scientific issues, J. Geophys. Res., 107(A12), 1468, doi:10.1029/2002JA009430. 
+.. [Richards2011] Richards, P. G. (2011). Reexamination of ionospheric photochemistry, J. Geophys. Res., 116, A08307, doi:10.1029/2011JA016613.
