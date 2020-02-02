@@ -37,7 +37,7 @@ matrix:
       - choco install mingw --params="'/AddToPath:1'"
       - source C:\tools\miniconda3\etc\profile.d\conda.sh
       - conda install -y pip pytest numpy
-    install: bash -c 'pip install -e .[tests,full,cov]'
+    install: pip install -e .[tests,full,cov]
 
 install: pip install -e .[tests,full]
 
