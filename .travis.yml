@@ -29,15 +29,15 @@ matrix:
         - gcc
         - lapack
     before_install: pip3 install pytest
-    install: pip3 install -e .[tests,full]
-  - os: windows
-    language: bash
-    before_install:
-      - choco install miniconda3 --params="'/AddToPath:1'"
-      - choco install mingw --params="'/AddToPath:1'"
-      - source C:\tools\miniconda3\etc\profile.d\conda.sh
-      - conda install -y pip pytest numpy
-    install: pip install -e .[tests,full,cov]
+    install: pip3 install -e .
+  # - os: windows
+  #   language: bash
+  #   before_install:
+  #     - choco install miniconda3 --params="'/AddToPath:1'"
+  #     - choco install mingw --params="'/AddToPath:1'"
+  #     - source C:\tools\miniconda3\etc\profile.d\conda.sh
+  #     - conda install -y pip pytest numpy
+  #   install: pip install -e .[tests,full,cov]
 
 install: pip install -e .[tests,full]
 
