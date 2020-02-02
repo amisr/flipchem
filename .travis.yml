@@ -34,7 +34,8 @@ matrix:
     before_install:
       - choco install miniconda3 --params="'/AddToPath:1'"
       - choco install mingw --params="'/AddToPath:1'"
-      - bash -c 'conda install -y pip pytest numpy'
+      - refreshenv
+      - conda install -y pip pytest numpy
     install: bash -c 'pip install -e .[tests,full,cov]'
 
 install: pip install -e .[tests,full]
