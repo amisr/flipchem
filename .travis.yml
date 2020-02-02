@@ -10,7 +10,7 @@ env: FC=gfortran
 
 addons:
   apt:
-    packages: ['gfortran','liblapack-dev','libopenmpi-dev']
+    packages: ['gfortran','liblapack-dev']
 
 python:
 - 3.7
@@ -29,15 +29,6 @@ matrix:
         - lapack
     before_install: pip3 install pytest
     install: pip3 install -e .[tests,full]
-  - os: linux
-    python: 3.7
-    before_install: pip install numpy
-  - os: linux
-    python: 3.6
-    before_install: pip install numpy
-  - os: linux
-    python: 2.7
-    before_install: pip install numpy
   # - os: windows
   #   language: bash
   #   env: PATH="/c/tools/miniconda3/:/c/tools/miniconda3/Scripts:$PATH"
