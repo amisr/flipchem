@@ -19,7 +19,15 @@
 import os
 import sys
 
-from flipchem import __version__
+
+# Get version number from __init__.py
+here = os.path.abspath(path.dirname(__file__))
+regex = "(?<=__version__..\s)\S+"
+with open(os.path.join(here,'../flipchem/__init__.py'),'r', encoding='utf-8') as f:
+    text = f.read()
+match = re.findall(regex,text)
+__version__ = match[0].strip("'")
+
 
 # sys.path.insert(0, os.path.abspath('.'))
 # mock modules for c extensions

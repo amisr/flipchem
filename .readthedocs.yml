@@ -9,11 +9,11 @@ build:
 
 python:
   version: 3.7
-  install:
-     - method: pip
-       path: .
-     - requirements: requirements.txt
-  system_packages: true
+  # install:
+  #    - method: pip
+  #      path: .
+  #    - requirements: requirements.txt
+  # system_packages: true
 
 sphinx:
   builder: html
