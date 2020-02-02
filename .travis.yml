@@ -6,6 +6,12 @@ git:
   depth: 25
   quiet: true
 
+env: FC=gfortran
+
+addons:
+  apt:
+    packages: ['gfortran','liblapack-dev','libopenmpi-dev']
+
 python:
 - 3.7
 - 3.6
@@ -19,6 +25,8 @@ matrix:
       homebrew:
         packages:
         - python3
+        - gcc
+        - lapack
     before_install: pip3 install pytest
     install: pip3 install -e .[tests,full]
   - os: linux
