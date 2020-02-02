@@ -10,7 +10,7 @@ from os import path
 import re
 from codecs import open
 from setuptools import find_packages
-
+# -*- coding: utf-8 -*-
 # Check if we can even import numpy, if not, provide a more helpful
 # exception message to the user than what it typically provided.
 try:

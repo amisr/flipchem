@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 """
     Based on code written by Mike Nicolls in 2007?
 
