@@ -13,6 +13,7 @@ addons:
     packages: ['gfortran','liblapack-dev']
 
 python:
+- 3.8
 - 3.7
 - 3.6
 - 2.7
@@ -34,7 +35,7 @@ matrix:
     before_install:
       - choco install miniconda3 --params="'/AddToPath:1'"
       - choco install mingw --params="'/AddToPath:1'"
-      - refreshenv
+      - source C:\tools\miniconda3\etc\profile.d\conda.sh
       - conda install -y pip pytest numpy
     install: bash -c 'pip install -e .[tests,full,cov]'
 
