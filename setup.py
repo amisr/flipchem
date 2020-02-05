@@ -6,7 +6,7 @@ Based on: https://github.com/pypa/sampleproject/master/setup.py
 """
 
 from __future__ import absolute_import
-from os import path
+import os
 import re
 from codecs import open
 from setuptools import find_packages
@@ -21,18 +21,24 @@ except ImportError as e:
     raise Exception(text)
 
 
-here = path.abspath(path.dirname(__file__))
+here = os.path.abspath(os.path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 # Get version number from __init__.py
 regex = "(?<=__version__..\s)\S+"
-with open(path.join(here,'flipchem/__init__.py'),'r', encoding='utf-8') as f:
+with open(os.path.join(here,'flipchem/__init__.py'),'r', encoding='utf-8') as f:
     text = f.read()
 match = re.findall(regex,text)
 version = match[0].strip("'")
+
+# Use mingw32 by default on windows
+if os.name == 'nt':
+    sfn = os.path.join(os.path.dirname(__file__), 'setup.cfg')
+    with open(sfn, 'w') as f:
+        f.write("\n[build_ext]\ncompiler = mingw32")
 
 # FLIPCHEM EXTENSION
 flipchem_sources = ["src/flipchem/flipchem.pyf",
