@@ -50,7 +50,7 @@ flipchem_sources = ["src/flipchem/flipchem.pyf",
                     "src/flipchem/MSIS00.f"]
 flipchem_ext = Extension(name = 'flipchem.ext._f_flipchem',
                          sources = flipchem_sources,
-                         extra_f77_compile_args=['--std=legacy'],
+                         extra_f77_compile_args=['--std=legacy','-finit-local-zero'],
                          )
 
 # MSIS EXTENSION

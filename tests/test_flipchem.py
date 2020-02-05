@@ -14,9 +14,8 @@ def test_Flipchem():
     from flipchem import Flipchem
 
     expected = (19.588119506835938,93.07436627254928,-22.65814170352014,
-                459736812500.0,29627486328.125,10508393554.6875,
-                35145938.873291016,92161865.234375,1110899.625,190259.5,1)
-
+                459733062500.0,29630238281.25,10509367187.5,35145942.68798828,
+                92176940.91796875,1110899.625,190275.46875,1)
 
     date = datetime(2017,1,4,2)
     fc = Flipchem(date)
@@ -27,7 +26,7 @@ def test_Flipchem():
     ne = 5.0e11
     te = ti = 600.
     outputs = fc.get_point(glat,glon,alt,ne,te,ti)
-
+    print(outputs)
     for i in range(len(expected)):        
         assert(expected[i] == approx(outputs[i],nan_ok=True))
 
