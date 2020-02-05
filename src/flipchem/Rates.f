@@ -62,7 +62,7 @@ C.... 2001, page 21,305. Rates different from Fox and Sung indicated by PGR
 
       !.. N2+ + O -> NO+ + N   Scott et al.[1999]
       IF(TI.LE.1500) RTS(10)= 1.33E-10*(300/TI)**0.44
-      IF(TI.GT.1500) RTS(10)= 6.55E-11*(1500/TI)**-0.2
+      IF(TI.GT.1500) RTS(10)= 6.55E-11*(1500/TI)**(-0.2)
 
       !.. N2+ + e -> N + N  Mehr and Biondi (1969)
       !.. Zipf (1980)
@@ -103,14 +103,14 @@ C.... 2001, page 21,305. Rates different from Fox and Sung indicated by PGR
       !.. N2 + O+(2D) -> N2+ + O   
       !.. Johnson and Biondi
       !..RTS(19)=8.0E-10
-      RTS(19)=1.50E-10*(300/Ti)**-0.55
+      RTS(19)=1.50E-10*(300/Ti)**(-0.55)
       !.. Li et al by PGR
       
       !.. N2 + O+(2P) -> N2+ + 0    Fox 
       !.. Li et al from Fox wrong
       !.. RTS(20)=6.2E-10*EXP(-340/TI)
       !.. Li et al by PGR
-      RTS(20)=2.0E-10*(300/Ti)**-0.55
+      RTS(20)=2.0E-10*(300/Ti)**(-0.55)
 
       !.. O2+ + N(4S) -> NO+ + 0   Scott et al.[1999]
       RTS(21)=1.0E-10
@@ -198,7 +198,7 @@ C.... 2001, page 21,305. Rates different from Fox and Sung indicated by PGR
 
       !.. efficiency N2+ + O -> N2 + O+(4S)   
       IF(TI.LE.1500) RTS(42)= 7.0E-12*(300/TI)**0.21
-      IF(TI.GT.1500) RTS(42)= 4.83E-12*(1500/TI)**-0.41
+      IF(TI.GT.1500) RTS(42)= 4.83E-12*(1500/TI)**(-0.41)
       !.. converts to efficiency
       RTS(42)=RTS(42)/RTS(10)
 

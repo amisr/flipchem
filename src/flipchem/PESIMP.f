@@ -42,8 +42,8 @@ C...... how to calculate electron heating rate and 3371 excitation rate.
       !.. Production of N2A
       REAL N2APRD
       REAL AP(7)
-	INTEGER YYYYDDD
-	REAL UTSEC,GLATD,GLOND,LTHRS
+      INTEGER YYYYDDD
+      REAL UTSEC,GLATD,GLOND,LTHRS
 
       DATA SPRD/.4,.56,.44, .4,.28,.44, .2,.06,.10, 0.,.05,.00, 0.,.05
      >             ,.00, 0.0,0.0,0.02/
@@ -150,8 +150,8 @@ C------ AFAC = the solar EUV attenuation warning flag
       INTEGER EMAX
       PARAMETER (RDIM=501)
       REAL AP(7)
-	INTEGER YYYYDDD
-	REAL UTSEC,GLATD,GLOND,LTHRS
+      INTEGER YYYYDDD
+      REAL UTSEC,GLATD,GLOND,LTHRS
       DIMENSION RJOX(RDIM),RJN2(RDIM),XN(3),COLUM(3),EUV(9),PEFLUX(IDIM)
 C
 C....... photoelectron production frequencies by 1.0E9. Renormalized below

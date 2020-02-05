@@ -649,7 +649,7 @@ C...... in hours (0-24)
        DJD=JD
        DUT=UT
        !.. # of centuries
-       T=(DJD+DUT/24.0-2451545.0)/36525.0
+       T=REAL((DJD+DUT/24.0-2451545.0)/36525.0)
       !..     WRITE(6,*) DAYNUM,YEAR,JD,UT
        !.. aberration
        L=AMOD(280.460+36000.770*T,360.0)
@@ -747,6 +747,7 @@ C...... Modified by P. Richards in November 2008 to allow for long runs
       !.. UT in secs, actual UT in secs (output)
       REAL SEC,SX
       IWR=0
+      NYRS=0
 
       !.. Check the run is not too long
       IF(SEC.GT.SDIM*3.16E+7) THEN
