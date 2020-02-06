@@ -37,9 +37,9 @@ matrix:
     - /c/tools/miniconda3/Scripts/conda init bash
     - bash -cl 'conda install -y pip pytest numpy'
     install: 
-    - pip install -e .
+    - bash -cl 'pip install -e .'
     script:
-    - pytest -rsv
+    - bash -cl 'pytest -rsv'
 
 install: pip install -e .
 
