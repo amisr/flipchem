@@ -18,18 +18,6 @@ python:
 - 3.6
 - 2.7
 
-
-before_install:
-- |-
-    case $TRAVIS_OS_NAME in
-      windows)
-        choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
-        export refresh='cmd //C RefreshEnv.cmd'
-        $refresh conda install -y pip pytest numpy
-        ;;
-    esac
-
-
 matrix:
   include:
   - os: osx
@@ -44,14 +32,19 @@ matrix:
     install: pip3 install -e .
   - os: windows
     language: bash
+    before_install:
+    - |-
+        choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
+        export refresh='cmd //C RefreshEnv.cmd'
+        $refresh && conda install -y pip pytest numpy
     install: 
     - |-
         export refresh='cmd //C RefreshEnv.cmd'
-        $refresh pip install -e .
+        $refresh && pip install -e .
     script:
     - |-
         export refresh='cmd //C RefreshEnv.cmd'
-        $refresh pytest -rsv
+        $refresh && pytest -rsv
 
 install: pip install -e .
 
