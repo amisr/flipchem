@@ -34,11 +34,11 @@ matrix:
     language: bash
     before_install:
     - choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
-    - cmd //C RefreshEnv.cmd && conda install -y pip pytest numpy
+    - /c/tools/miniconda3/Scripts/conda install -y pip pytest numpy
     install: 
-    - cmd //C RefreshEnv.cmd && pip install -e .
+    - /c/tools/miniconda3/Scripts/pip install -e .
     script:
-    - cmd //C RefreshEnv.cmd && pytest -rsv
+    - /c/tools/miniconda3/Scripts/pytest -rsv
 
 install: pip install -e .
 
