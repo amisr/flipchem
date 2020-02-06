@@ -34,11 +34,12 @@ matrix:
     language: bash
     before_install:
     - choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
-    - bash -c 'conda install -y pip pytest numpy'
+    - /c/tools/miniconda3/Scripts/conda init bash
+    - bash -cl 'conda install -y pip pytest numpy'
     install: 
-    - bash -c 'pip install -e .'
+    - pip install -e .
     script:
-    - bash -c 'pytest -rsv'
+    - pytest -rsv
 
 install: pip install -e .
 
