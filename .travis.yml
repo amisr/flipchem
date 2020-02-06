@@ -24,7 +24,6 @@ before_install:
     case $TRAVIS_OS_NAME in
       windows)
         choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
-        choco install mingw
         export refresh='cmd //C RefreshEnv.cmd'
         $refresh conda install -y pip pytest numpy
         ;;
@@ -45,7 +44,14 @@ matrix:
     install: pip3 install -e .
   - os: windows
     language: bash
-    install: pip install -e .
+    install: 
+    - |-
+        export refresh='cmd //C RefreshEnv.cmd'
+        $refresh pip install -e .
+    script:
+    - |-
+        export refresh='cmd //C RefreshEnv.cmd'
+        $refresh pytest -rsv
 
 install: pip install -e .
 
