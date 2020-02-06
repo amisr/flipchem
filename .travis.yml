@@ -33,18 +33,12 @@ matrix:
   - os: windows
     language: bash
     before_install:
-    - |-
-        choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
-        export refresh='cmd //C RefreshEnv.cmd'
-        $refresh && conda install -y pip pytest numpy
+    - choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
+    - cmd //C RefreshEnv.cmd && conda install -y pip pytest numpy
     install: 
-    - |-
-        export refresh='cmd //C RefreshEnv.cmd'
-        $refresh && pip install -e .
+    - cmd //C RefreshEnv.cmd && pip install -e .
     script:
-    - |-
-        export refresh='cmd //C RefreshEnv.cmd'
-        $refresh && pytest -rsv
+    - cmd //C RefreshEnv.cmd && pytest -rsv
 
 install: pip install -e .
 
