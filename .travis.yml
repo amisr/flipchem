@@ -18,6 +18,19 @@ python:
 - 3.6
 - 2.7
 
+
+before_install:
+- |-
+    case $TRAVIS_OS_NAME in
+      windows)
+        choco install miniconda3 --params="'/AddToPath:1'" --params="'/RegisterPython:1'"
+        choco install mingw
+        export refresh='cmd //C RefreshEnv.cmd'
+        $refresh conda install -y pip pytest numpy
+        ;;
+    esac
+
+
 matrix:
   include:
   - os: osx
@@ -30,15 +43,10 @@ matrix:
         - lapack
     before_install: pip3 install pytest
     install: pip3 install -e .
-  # - os: windows
-  #   language: bash
-  #   before_install:
-  #     - choco install miniconda3 --params="'/AddToPath:1'"
-  #     - choco install mingw --params="'/AddToPath:1'"
-  #     - source C:\tools\miniconda3\etc\profile.d\conda.sh
-  #     - conda install -y pip pytest numpy
-  #   install: pip install -e .[tests,full,cov]
+  - os: windows
+    language: bash
+    install: pip install -e .
 
-install: pip install -e .[tests,full]
+install: pip install -e .
 
 script: pytest -rsv
