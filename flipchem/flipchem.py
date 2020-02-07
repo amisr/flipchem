@@ -69,7 +69,8 @@ class Flipchem():
                                       self.f107,te,ti,Tn,Odens,O2dens,N2dens,HEdens,
                                       Ndens,ne,user_no=user_no,user_nplus=user_nplus)
 
-        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success = flip_outputs
+        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D = flip_outputs[:-1]
+        success = int(1 - flip_outputs[-1])
 
         # scale into SI units (m^-3)
         OXPLUS = OXPLUS * 1.0e6
