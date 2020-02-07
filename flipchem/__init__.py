@@ -8,7 +8,7 @@ from .msis import compute_ion_neutral_collfreq, compute_electron_neutral_collfre
 from .msis import compute_electron_neutral_collfreq
 from .flipchem import Flipchem
 
-__version__ = '2020.0.9'
+__version__ = '2020.1.0'
 __doc__ = """
 This package contains the a python wrapper of the flipchem ionospheric
 photochemistry model developed by Phil Richards:
