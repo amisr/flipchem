@@ -26,7 +26,7 @@ Since this package is a wrapper around both C and Fortran source code, one must 
 
 Installation of `flipchem` can be accomplished using `pip`::
 
-    pip install git+https://github.com/amisr/flipchem.git@v2020.0.9
+    pip install git+https://github.com/amisr/flipchem.git@v2020.1.0
 
 
 Example Usage
