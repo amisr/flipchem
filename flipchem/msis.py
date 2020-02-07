@@ -33,7 +33,7 @@ def compute_ion_neutral_collfreq(d, Tn, mi, Ti):
     # the equations come from:
     #    n_in = 2.21*pi*n_n*sqrt(gamma_n*e**2*m_n)/sqrt(m_i*(m_i+m_n))
     # which reduces to (after unit conversion to SI):
-    #    n_in = 2.5880819319480624e-3*n_n*sqrt(gamma_n*m_n)/sqrt(m_i*(m_i+m_n))
+    #    n_in = 2.58790619679528e-3*n_n*sqrt(gamma_n*m_n)/sqrt(m_i*(m_i+m_n))
     # where gamma_n is in units of 1e-24 cm^3 and the masses are in amu
     # then, taking the values for gamma in table 4.1 and the amu for the 
     # neutrals, we can get an equation that is:
