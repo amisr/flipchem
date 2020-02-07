@@ -15,7 +15,7 @@ def test_Flipchem():
 
     expected = (19.588119506835938,93.07436627254928,-22.65814170352014,
                 459733062500.0,29630238281.25,10509367187.5,35145942.68798828,
-                92176940.91796875,1110899.625,190275.46875,1)
+                92176940.91796875,1110899.625,190275.46875,True)
 
     date = datetime(2017,1,4,2)
     fc = Flipchem(date)
@@ -27,8 +27,11 @@ def test_Flipchem():
     te = ti = 600.
     outputs = fc.get_point(glat,glon,alt,ne,te,ti)
     print(outputs)
-    for i in range(len(expected)):        
-        assert(expected[i] == approx(outputs[i],nan_ok=True))
+    for i in range(len(expected)):
+        if isinstance(expected[i],bool):
+            assert(expected[i] == outputs[i])
+        else:
+            assert(expected[i] == approx(outputs[i],nan_ok=True))
 
 
 def test_MSIS():
