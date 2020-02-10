@@ -83,10 +83,10 @@ class Flipchem():
 
     def get_point_fractions(self,glat,glon,alt,ne,te,ti,user_no=-1.0,user_nplus=-1.0,msis_outputs=None,minval=0.001,maxval=1.0,altop=300.0):
         flip_outputs = self.get_point(glat,glon,alt,ne,te,ti,user_no=-1.0,user_nplus=-1.0,msis_outputs=msis_outputs)
-        OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success = flip_outputs
+        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success = flip_outputs
 
         # compute fractions
-        if altkm > altop:
+        if alt > altop:
             OXPLUS = 1.0
             O2PLUS = 0.0
             NOPLUS = 0.0
@@ -121,7 +121,7 @@ class Flipchem():
         elif NPLUS > maxval:
             NPLUS = 1.0
 
-        return lthrs,szad,decd,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success
+        return LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success
 
     def call_flip(self,date,lat,lon,alt,ap,f107a,f107,te,ti,tn,OXN,O2N,N2N,HEN,N4S,NE,user_no=-1.0,user_nplus=-1.0):
 

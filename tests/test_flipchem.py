@@ -33,6 +33,29 @@ def test_Flipchem():
         else:
             assert(expected[i] == approx(outputs[i],nan_ok=True))
 
+def test_Flipchem_fractions():
+    from flipchem import Flipchem
+
+    expected = (3.273433208465576,133.14190201943407,-22.97288535821079,
+                0.9594204375,0.02828495703125,0.0120184853515625,0.0,0.0,
+                673794.6875,196179.1875,True)
+
+    date = datetime(2018,1,1,2)
+    fc = Flipchem(date)
+
+    glat = 70
+    glon = 20
+    alt = 200
+    ne = 5.0e11
+    te = ti = 500
+    outputs = fc.get_point_fractions(glat,glon,alt,ne,te,ti)
+    print(outputs)
+    for i in range(len(expected)):
+        if isinstance(expected[i],bool):
+            assert(expected[i] == outputs[i])
+        else:
+            assert(expected[i] == approx(outputs[i],nan_ok=True))
+
 
 def test_MSIS():
     from flipchem import MSIS
