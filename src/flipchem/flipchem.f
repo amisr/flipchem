@@ -1,5 +1,4 @@
-C FLIP-IRI.for 
-C
+C flipchem.f, based on FLIP-IRI.for provided by Phil Richards Feb 2020.
 C 2012.00 10/05/11 IRI-2012: bottomside B0 B1 model (SHAMDB0D, SHAB1D),
 C 2012.00 10/05/11    bottomside Ni model (iriflip.for), auroral foE
 C 2012.00 10/05/11    storm model (storme_ap), Te with PF10.7 (elteik),
@@ -12,6 +11,7 @@ C 2012.01 01/04/12 Deleted FINDAP,READAP,CONV_DATE,GET_DATA,RATCHK (not used)
 C 2012.01 01/04/12 Deleted BRACE,ACTUAL_DAY,EPHEM SOLDEC,TFILE,RUN_ERROR (not used)
 C 2012.01 01/04/12 COP2D: 99 FOMRAT ',' missing; commented out all WRITEs
 C 2014.01 07/17/14 COP4S: NPLUS=0; PR(13)=0.0 ------------------------- A Shabanloui
+C 2020.01 11/02/20 A. Reimer added GETLTSZA back in, added comments for f2py
 C****************************************************************************************
 C subroutines for IDC model
 C

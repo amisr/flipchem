@@ -1,6 +1,6 @@
 This code was modified to remove inline comments.
 
-Then in the "flipchem.for" file, comments were added to define the intent of 
+Then in the "flipchem.f" file, comments were added to define the intent of 
 variables passed to "CHEMION". These comments were added starting line 143:
 
 Cf2py intent(out) OXPLUS
@@ -20,4 +20,4 @@ Cf2py intent(out) SZA
 Cf2py intent(out) DEC
 
 The flipchem.pyf file was generated using:
-    f2py -m _f_flipchem -h flipchem.pyf flipchem.for
+    f2py -m _f_flipchem -h flipchem.pyf flipchem.f
