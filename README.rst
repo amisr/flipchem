@@ -1,11 +1,11 @@
 flipchem
 ========
-.. image:: https://travis-ci.org/amisr/flipchem.svg?branch=master
-    :target: https://travis-ci.org/amisr/flipchem
+.. image:: https://travis-ci.com/amisr/flipchem.svg?branch=master
+    :target: https://travis-ci.com/amisr/flipchem
 
 Overview
 --------
-`flipchem` provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards [Richards2011]_. The model requires NRLMSIS-00 neutral density and the f107 f107a and AP geophysical parameters as inputs, so both of these have been packaged with `flipchem`. NRLMSIS-00 is provided by wrapping the C version of the code written by Dominik Brodowski, which is based on the original Fortran version of the model [Picone2002]_.
+`flipchem` provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards [Richards2011]_. Specifically, this code wraps the version of flipchem that was used for [Richards2010]_. The model requires NRLMSIS-00 neutral density and the f107, f107a, and AP geophysical parameters, so both of these have been packaged with `flipchem`. NRLMSIS-00 is provided by wrapping the C version of the code written by Dominik Brodowski, which is based on the original Fortran version of the model [Picone2002]_.
 
 Use Case
 --------
@@ -58,13 +58,13 @@ Get the O+, O2+, NO+, N2+, and N+ ion densities at 130km above the RISR-N ISR::
     ne = 5.0e11
     te = ti = 600.
     outputs = fc.get_point(glat,glon,alt,ne,te,ti)
-    lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,success = outputs
+    lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,ITERS = outputs
 
 
 Or, we can get the ion fractions instead by replacing the last 2 lines with::
 
     outputs = fc.get_point_fractions(glat,glon,alt,ne,te,ti)
-    lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,success = outputs
+    lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,ITERS = outputs
 
 
 One can also access MSIS directly::
@@ -121,4 +121,5 @@ Example Notebook
 
 .. [Oliphant2006] Oliphant, T. E. (2006). A guide to NumPy (Vol. 1). Trelgol Publishing USA.
 .. [Picone2002] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002). NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons and scientific issues, J. Geophys. Res., 107(A12), 1468, doi:10.1029/2002JA009430. 
+.. [Richards2010] Richards, P. G., Bilitza, D., and Voglozin, D. (2010), Ion density calculator (IDC): A new efficient model of ionospheric ion densities, Radio Sci., 45, RS5007, doi:10.1029/2009RS004332.
 .. [Richards2011] Richards, P. G. (2011). Reexamination of ionospheric photochemistry, J. Geophys. Res., 116, A08307, doi:10.1029/2011JA016613.
