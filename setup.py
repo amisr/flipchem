@@ -42,14 +42,10 @@ if os.name == 'nt':
 
 # FLIPCHEM EXTENSION
 flipchem_sources = ["src/flipchem/flipchem.pyf",
-                    "src/flipchem/FLIP-CHEM.f",
-                    "src/flipchem/KEMPRN.f",
-                    "src/flipchem/PESIMP.f",
-                    "src/flipchem/Rates.f",
-                    "src/flipchem/RSPRIM.f",
-                    "src/flipchem/MSIS00.f"]
+                    "src/flipchem/flipchem.f"]
 flipchem_ext = Extension(name = 'flipchem.ext._f_flipchem',
                          sources = flipchem_sources,
+                         extra_f90_compile_args=['--std=legacy','-finit-local-zero'],
                          extra_f77_compile_args=['--std=legacy','-finit-local-zero'],
                          )
 

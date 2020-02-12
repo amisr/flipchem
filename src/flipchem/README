@@ -1,7 +1,7 @@
 This code was modified to remove inline comments.
 
-Then in the "FLIP-CHEM.f" file, comments were added to define the intent of 
-variables passed to "CHEMION". These comments were added starting line 111:
+Then in the "flipchem.for" file, comments were added to define the intent of 
+variables passed to "CHEMION". These comments were added starting line 143:
 
 Cf2py intent(out) OXPLUS
 Cf2py intent(out) O2PLUS
@@ -10,14 +10,14 @@ Cf2py intent(out) N2PLUS
 Cf2py intent(out) NPLUS
 Cf2py intent(out) NNO
 Cf2py intent(out) N2D
-Cf2py intent(out) INEWT
+Cf2py intent(out) ITERS
 
-Then in the "RSPRIM.f" file, comments were added to define the intent of 
-variables passed to "GETLTSZA". These comments were added starting line 694:
+Then on line 2480, comments were added to define the intent of 
+variables passed to "GETLTSZA":
 
 Cf2py intent(out) SAT
 Cf2py intent(out) SZA
 Cf2py intent(out) DEC
 
 The flipchem.pyf file was generated using:
-    f2py -m _f_flipchem -h flipchem.pyf FLIP-CHEM.f KEMPRN.f MSIS00.f PESIMP.f Rates.f RSPRIM.f
+    f2py -m _f_flipchem -h flipchem.pyf flipchem.for

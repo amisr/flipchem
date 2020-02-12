@@ -3,13 +3,9 @@
 
 python module _f_flipchem ! in 
     interface  ! in :_f_flipchem
-        subroutine chemion(jprint,alt,ap,f107,f107a,te,ti,tn,oxn,o2n,n2n,hen,user_no,n4s,ne,user_oplus,szad,oxplus,o2plus,noplus,n2plus,nplus,nno,n2d,iters) ! in :_f_flipchem:FLIP-CHEM.f
+        subroutine chemion(jprint,alt,f107,f107a,te,ti,tn,oxn,o2n,n2n,hen,hn,user_no,n4s,ne,user_oplus,szad,oxplus,o2plus,noplus,n2plus,nplus,nno,n2d,iters) ! in :_f_flipchem:flipchem.f
             integer :: jprint
-            integer :: yyyyddd
             real :: alt
-            real :: glatd
-            real :: glond
-            real :: ap
             real :: f107
             real :: f107a
             real :: te
@@ -19,12 +15,11 @@ python module _f_flipchem ! in
             real :: o2n
             real :: n2n
             real :: hen
+            real :: hn
             real :: user_no
             real :: n4s
             real :: ne
             real :: user_oplus
-            real :: utsec
-            real :: lthrs
             real :: szad
             real intent(out) :: oxplus
             real intent(out) :: o2plus
@@ -37,10 +32,11 @@ python module _f_flipchem ! in
             real dimension(3,12) :: euvion
             real dimension(3,12) :: pexcit
             real dimension(3,12) :: pepion
+            real dimension(6) :: othpr1
             real dimension(6) :: othpr2
-            common /euvprd/ euvion,pexcit,pepion,othpr2
+            common /euvprd/ euvion,pexcit,pepion,othpr1,othpr2
         end subroutine chemion
-        subroutine getltsza(iday,sec,glatr,glond,sat,sza,dec) ! in :_f_flipchem:RSPRIM.f
+        subroutine getltsza(iday,sec,glatr,glond,sat,sza,dec) ! in :_f_flipchem:flipchem.f
             integer :: iday
             real :: sec
             real :: glatr
@@ -49,18 +45,6 @@ python module _f_flipchem ! in
             real intent(out) :: sza
             real intent(out) :: dec
         end subroutine getltsza
-        subroutine actual_day(iday,sec,id,sx) ! in :_f_flipchem:RSPRIM.f
-            integer :: iday
-            real :: sec
-            integer :: id
-            real :: sx
-        end subroutine actual_day
-        subroutine brace(h,ne,tn,tb) ! in :_f_flipchem:RSPRIM.f
-            real :: h
-            real :: ne
-            real :: tn
-            real :: tb
-        end subroutine brace
     end interface 
 end python module _f_flipchem
 
