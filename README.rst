@@ -1,7 +1,7 @@
 flipchem
 ========
-.. image:: https://travis-ci.org/amisr/flipchem.svg?branch=master
-    :target: https://travis-ci.org/amisr/flipchem
+.. image:: https://travis-ci.com/amisr/flipchem.svg?branch=master
+    :target: https://travis-ci.com/amisr/flipchem
 
 Overview
 --------
