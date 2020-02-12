@@ -19,12 +19,19 @@ class Flipchem():
     developed by Phil Richards:
 
     Richards, P. G. (2011), Reexamination of ionospheric photochemistry,
-    J. Geophys. Res., 116, A08307, doi:10.1029/2011JA016613. 
+    J. Geophys. Res., 116, A08307, doi:10.1029/2011JA016613.
+
+    Specifically, this code wraps the version of flipchem that was used
+    for:
+
+    Richards, P. G., Bilitza, D., and Voglozin, D. (2010), Ion density
+    calculator (IDC): A new efficient model of ionospheric ion densities,
+    Radio Sci., 45, RS5007, doi:10.1029/2009RS004332. 
 
     flipchem requires an input neutral atmosphere and the geophysical
-    indicies: f107, f107a, and AP. NRLMSIS-00 is used to provide a 
-    neutral atmosphere (see the flipchem.MSIS class). See read_geophys
-    for more details about geophysical indicies.
+    indicies: f107 and f107a. NRLMSIS-00 is used to provide a neutral
+    atmosphere (see the flipchem.MSIS class). See read_geophys for more
+    details about geophysical indicies.
 
 
     Example Usage:
@@ -41,7 +48,7 @@ class Flipchem():
         ne = 5.0e11
         te = ti = 500.
         outputs = fc.get_point_fractions(glat,glon,alt,ne,te,ti)
-        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success = outputs
+        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,ITERS = outputs
 
     """
 
@@ -69,8 +76,7 @@ class Flipchem():
                                       self.f107,te,ti,Tn,Odens,O2dens,N2dens,HEdens,Hdens,
                                       Ndens,ne,user_no=user_no,user_oplus=user_oplus)
 
-        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D = flip_outputs[:-1]
-        success = bool(flip_outputs[-1])
+        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,ITERS = flip_outputs
 
         # scale into SI units (m^-3)
         OXPLUS = OXPLUS * 1.0e6
@@ -79,11 +85,11 @@ class Flipchem():
         N2PLUS = N2PLUS * 1.0e6
         NPLUS = NPLUS * 1.0e6
 
-        return LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success
+        return LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,ITERS
 
     def get_point_fractions(self,glat,glon,alt,ne,te,ti,user_no=-1.0,user_oplus=-1.0,msis_outputs=None,minval=0.001,maxval=1.0,altop=300.0):
         flip_outputs = self.get_point(glat,glon,alt,ne,te,ti,user_no=-1.0,user_oplus=-1.0,msis_outputs=msis_outputs)
-        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success = flip_outputs
+        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,ITERS = flip_outputs
 
         # compute fractions
         if alt > altop:
@@ -121,7 +127,7 @@ class Flipchem():
         elif NPLUS > maxval:
             NPLUS = 1.0
 
-        return LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success
+        return LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,ITERS
 
     def call_flip(self,date,lat,lon,alt,ap,f107a,f107,te,ti,tn,OXN,O2N,N2N,HEN,HN,N4S,NE,user_no=-1.0,user_oplus=-1.0):
 
