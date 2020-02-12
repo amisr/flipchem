@@ -66,7 +66,7 @@ class Flipchem():
 
         # now call flipchem
         flip_outputs = self.call_flip(self.date,glat,glon,alt,self.ap,self.f107a,
-                                      self.f107,te,ti,Tn,Odens,O2dens,N2dens,HEdens,
+                                      self.f107,te,ti,Tn,Odens,O2dens,N2dens,HEdens,Hdens,
                                       Ndens,ne,user_no=user_no,user_oplus=user_oplus)
 
         LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D = flip_outputs[:-1]
@@ -123,7 +123,7 @@ class Flipchem():
 
         return LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success
 
-    def call_flip(self,date,lat,lon,alt,ap,f107a,f107,te,ti,tn,OXN,O2N,N2N,HEN,N4S,NE,user_no=-1.0,user_oplus=-1.0):
+    def call_flip(self,date,lat,lon,alt,ap,f107a,f107,te,ti,tn,OXN,O2N,N2N,HEN,HN,N4S,NE,user_no=-1.0,user_oplus=-1.0):
 
         # extract year and doy from given datetime
         year = date.year
@@ -145,9 +145,7 @@ class Flipchem():
         # As per paragraph [13] of Richards 2011, input N4S density needs to
         # be halved if it comes from NRLMSIS-00.
         # all density units need to be in cm^-3
-        outputs = _chemion(jprint,alt,ap,f107,f107a,te,ti,tn,OXN,O2N,N2N,HEN,
-                           user_no,0.5*N4S,NE*1.0e-6,user_oplus,szad)
-
+        outputs = _chemion(jprint,alt,f107,f107a,te,ti,tn,OXN,O2N,N2N,HEN,HN,user_no,0.5*N4S,NE*1.0e-6,user_oplus,szad)
         OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success = outputs
             
         return lthrs,szad,decd,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,success
