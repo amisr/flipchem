@@ -61,9 +61,9 @@ Get the O+, O2+, NO+, N2+, and N+ ion densities at 130km above the RISR-N ISR::
     lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,ITERS = outputs
 
 
-Or, we can get the ion fractions instead by replacing the last 2 lines with::
+Or, we can get the ion fractions instead by replacing setting the fractions keyword to True::
 
-    outputs = fc.get_point_fractions(glat,glon,alt,ne,te,ti)
+    outputs = fc.get_point(glat,glon,alt,ne,te,ti,fractions=True)
     lthrs,sza,dec,Op,O2p,NOp,N2p,Np,NNO,N2D,ITERS = outputs
 
 
@@ -79,7 +79,7 @@ One can also access MSIS directly::
 
     msis = MSIS(date)
     outputs = msis.get_point(glat,glon,alt)
-    He,O,N2,O2,Ar,Mass,H,N,AnomO,Texo,Tn = outputs
+    H,He,N,O,N2,O2,Ar,Mass,AnomO,Texo,Tn = outputs
 
 And one can also access the f107, f107a, and AP::
 
@@ -103,7 +103,7 @@ And there is code available with the MSIS wrapper that provides ion-neutral and 
 
     msis = MSIS(date)
     outputs = msis.get_point(glat,glon,alt)
-    He,O,N2,O2,Ar,Mass,H,N,AnomO,Texo,Tn = outputs
+    H,He,N,O,N2,O2,Ar,Mass,AnomO,Texo,Tn = outputs
     
     # N+, O+, N2+, NO+, O2+
     ion_masses = [14.0,16.0,28.0,30.0,32.0]
