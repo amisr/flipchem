@@ -194,6 +194,14 @@ class Flipchem():
         #file output off
         jprint = 0
 
+        # needs neutral densities in per cubic centimeter
+        OXN *= 1.0e-6
+        O2N *= 1.0e-6
+        N2N *= 1.0e-6
+        HEN *= 1.0e-6
+        HN *= 1.0e-6
+        N4S *= 1.0e-6
+
         # As per paragraph [13] of Richards 2011, input N4S density needs to
         # be halved if it comes from NRLMSIS-00.
         # all density units need to be in cm^-3

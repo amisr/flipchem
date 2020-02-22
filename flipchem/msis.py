@@ -76,29 +76,29 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     nu_in = 0.0
 
     # H, no resonant because we don't include H+ in ISR fitting
-    nu_in += 1.0e6 * densities[0] * Hconst / np.sqrt(mi * (mi + 16.0))
+    nu_in += densities[0] * Hconst / np.sqrt(mi * (mi + 16.0))
     # He, no resonant because we don't include He+ in ISR fitting
-    nu_in += 1.0e6 * densities[1] * Heconst / np.sqrt(mi * (mi + 16.0))
+    nu_in += densities[1] * Heconst / np.sqrt(mi * (mi + 16.0))
     # N
     if mi == 14.0:
-        nu_in += densities[2] * 3.83e-11 * sqrtTr * (1.0 - 0.063 * log10Tr)**2.0
+        nu_in += 1.0e-6 * densities[2] * 3.83e-11 * sqrtTr * (1.0 - 0.063 * log10Tr)**2.0
     else:
-        nu_in += 1.0e6 * densities[2]* Nconst / np.sqrt(mi * (mi + 16.0))
+        nu_in += densities[2]* Nconst / np.sqrt(mi * (mi + 16.0))
     # O
     if mi == 16.0:
-        nu_in += densities[3] * 3.67e-11 * sqrtTr * (1.0 - 0.064 * log10Tr)**2.0
+        nu_in += 1.0e-6 * densities[3] * 3.67e-11 * sqrtTr * (1.0 - 0.064 * log10Tr)**2.0
     else:
-        nu_in += 1.0e6 * densities[3] * Oconst / np.sqrt(mi * (mi + 16.0))
+        nu_in += densities[3] * Oconst / np.sqrt(mi * (mi + 16.0))
     # N2
     if mi == 28.0:
-        nu_in += densities[4] * 5.14e-11 * sqrtTr * (1.0 - 0.069 * log10Tr)**2.0
+        nu_in += 1.0e-6 * densities[4] * 5.14e-11 * sqrtTr * (1.0 - 0.069 * log10Tr)**2.0
     else:
-        nu_in += 1.0e6 * densities[4] * N2const / np.sqrt(mi * (mi + 28.0))
+        nu_in += densities[4] * N2const / np.sqrt(mi * (mi + 28.0))
     # 02
     if mi == 32.0 and Tr > 800.0:
-        nu_in += densities[5] * 2.59e-11 * sqrtTr * (1.0 - 0.073 * log10Tr)**2.0
+        nu_in += 1.0e-6 * densities[5] * 2.59e-11 * sqrtTr * (1.0 - 0.073 * log10Tr)**2.0
     else:
-        nu_in += 1.0e6 * densities[5] * O2const / np.sqrt(mi * (mi + 32.0))
+        nu_in += densities[5] * O2const / np.sqrt(mi * (mi + 32.0))
     
     return nu_in
 
@@ -140,12 +140,12 @@ def compute_electron_neutral_collfreq(densities, Te):
     # Table 4.6 page 99 of Schunk and Nagy Ionospheres text book 2000
     sqrtTe = np.sqrt(Te)
     nu_en = 0.0
-    nu_en += densities[0] * 4.5e-9 * (1.0 - 1.35e-4 * Te) * sqrtTe # H
-    nu_en += densities[1] * 4.6e-10 * sqrtTe # He
+    nu_en += 1e-6 * densities[0] * 4.5e-9 * (1.0 - 1.35e-4 * Te) * sqrtTe # H
+    nu_en += 1e-6 * densities[1] * 4.6e-10 * sqrtTe # He
     # no N in Schunk and Nagy!
-    nu_en += densities[3] * 8.9e-11 * (1.0 + 5.7e-4 * Te) * sqrtTe # O
-    nu_en += densities[4] * 2.33e-11 * (1.0 - 1.2e-4 * Te) * Te # N2
-    nu_en += densities[5] * 1.82e-10 * (1.0 + 3.6e-2 * sqrtTe) * sqrtTe # O2
+    nu_en += 1e-6 * densities[3] * 8.9e-11 * (1.0 + 5.7e-4 * Te) * sqrtTe # O
+    nu_en += 1e-6 * densities[4] * 2.33e-11 * (1.0 - 1.2e-4 * Te) * Te # N2
+    nu_en += 1e-6 * densities[5] * 1.82e-10 * (1.0 + 3.6e-2 * sqrtTe) * sqrtTe # O2
     
     return nu_en
 
@@ -234,7 +234,43 @@ class MSIS():
 
 
     def get_point(self,glat,glon,alt):
+        """Evaluates the flipchem model for the input geodetic coordinates
 
+        Parameters
+        ==========
+        glat : float
+            Geodetic Latitude
+        glon : float
+            Geodetic Longitude
+        alt : float
+            Altitude above the Geodetic surface of the Earth
+
+        Returns
+        =======
+        H : float
+            Hydrogen number density in number per cubic meter
+        He : float
+            Helium number density in number per cubic meter
+        N : float
+            Nitrogen number density in number per cubic meter
+        O : float
+            Atomic Oxygen number density in number per cubic meter
+        N2 : float
+            Diatomic Nitrogen number density in number per cubic meter
+        O2 : float
+            Diatomic Oxygen number density in number per cubic meter
+        Ar : float
+            Argon number density in number per cubic meter
+        Mass : float
+            Total mass in kilograms
+        AnomO : float
+            Anomlous Oxygen number density in number per cubic meter
+        Texo : float
+            Exosphere temperature in Kelvin
+        Tn : float
+            Mean neutral temperature in Kelvin
+
+        """
         # extract year and doy from given datetime
         year = self.date.year
         doy = int((self.date - datetime(year,1,1)).total_seconds()/86400) + 1
@@ -244,15 +280,15 @@ class MSIS():
         densities, temps = self._call_library(year,doy,hrut,alt,glat,glon,self.ap,
                                               self.f107a,self.f107,-1)
 
-        He = densities[0]
-        O  = densities[1]
-        N2 = densities[2]
-        O2 = densities[3]
-        Ar = densities[4]
-        Mass = densities[5]
-        H  = densities[6]
-        N  = densities[7]
-        AnomO = densities[8]
+        He = densities[0] * 1e6
+        O  = densities[1] * 1e6
+        N2 = densities[2] * 1e6
+        O2 = densities[3] * 1e6
+        Ar = densities[4] * 1e6
+        Mass = densities[5] * 1e6
+        H  = densities[6] * 1e6
+        N  = densities[7] * 1e6
+        AnomO = densities[8] * 1e6
         Texo = temps[0]
         Tn = temps[1]
             
