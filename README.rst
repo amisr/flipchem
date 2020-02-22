@@ -26,7 +26,7 @@ Since this package is a wrapper around both C and Fortran source code, one must 
 
 Installation of `flipchem` can be accomplished using `pip`::
 
-    pip install git+https://github.com/amisr/flipchem.git@v2020.1.1
+    pip install git+https://github.com/amisr/flipchem.git@v2020.2.0
 
 
 Example Usage
@@ -117,7 +117,7 @@ And there is code available with the MSIS wrapper that provides ion-neutral and 
 Example Notebook
 ----------------
 
-`Here you can find an example notebook that shows how to get altitude profiles of ion densities <https://nbviewer.jupyter.org/github/amisr/flipchem/blob/v2020.1.1/notebooks/usage_examples.ipynb>`_. Is there an example missing that you would like to see? Feel free to suggest one!
+`Here you can find an example notebook that shows how to get altitude profiles of ion densities <https://nbviewer.jupyter.org/github/amisr/flipchem/blob/v2020.2.0/notebooks/usage_examples.ipynb>`_. Is there an example missing that you would like to see? Feel free to suggest one!
 
 .. [Oliphant2006] Oliphant, T. E. (2006). A guide to NumPy (Vol. 1). Trelgol Publishing USA.
 .. [Picone2002] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002). NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons and scientific issues, J. Geophys. Res., 107(A12), 1468, doi:10.1029/2002JA009430. 
