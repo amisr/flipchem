@@ -20,7 +20,8 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     Parameters
     ==========
     densities : array_like
-        An array of neutral densities in this order: H, He, N, O, N2, O2
+        An array of neutral densities in this order: H, He, N, O, N2, O2 with
+        units of number per cubic meter.
     Tn : float
         The mean neutral temperature in Kelvin
     mi : integer
@@ -111,7 +112,8 @@ def compute_electron_neutral_collfreq(densities, Te):
     Parameters
     ==========
     densities : array_like
-        An array of neutral densities in this order: H, He, N, O, N2, O2.
+        An array of neutral densities in this order: H, He, N, O, N2, O2 with
+        units of number per cubic meter.
         See Notes for comment about Nitrogen.
     Te : float
         The electron temperature in Kelvin
@@ -158,7 +160,7 @@ class MSIS():
     Parameters
     ==========
     date : :class:`datetime.datetime`
-        Date and time for which to evaluate the flipchem model.
+        Date and time for which to evaluate MSIS.
 
     Attributes
     ==========
