@@ -30,6 +30,10 @@ Then, installation of `flipchem` can be accomplished using `pip`::
 
 And to make a profile of ion densities, one can try this::
 
+
+    from datetime import datetime
+    import numpy as np
+    import flipchem
     date = datetime(2017,1,4,18)
     fc = flipchem.Flipchem(date)
     
