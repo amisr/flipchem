@@ -174,9 +174,8 @@ class MSIS():
     required to run MSIS, from a local cache. See read_geophys
     for more details.
 
-    Usage
-    =====
-
+    Examples
+    ========
     from flipchem import MSIS
     from datetime import datetime
 

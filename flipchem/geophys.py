@@ -32,7 +32,6 @@ def read_geophys(date):
 
     Returns
     =======
-
     f107 : float
         F10.7 for the previous day
     f107a : float
@@ -58,12 +57,9 @@ def read_geophys(date):
     1901022529 9 0 0 0 0 3 3 0 0  7  0  0  0  0  2  2  0  0  00.00---072.70
     19010325291010 0 0 3 3 0 0 3 20  4  0  0  2  2  0  0  2  10.00---070.20
     etc.
-    
 
-
-    Usage
-    =====
-
+    Examples
+    ========
     from datetime import datetime
     import flipchem
 
@@ -223,9 +219,8 @@ def update_geophys(year=None,base_url='https://amisr.com/geophys_params/'):
     The files are updated on a daily basis, so it is important to update
     the local copy of these files on a regular basis.
 
-    Usage
-    =====
-
+    Examples
+    ========
     import flipchem
     flipchem.update_geophys(2020)
 

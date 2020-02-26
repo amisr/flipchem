@@ -41,8 +41,8 @@ class Flipchem():
     atmosphere (see the :class:`flipchem.MSIS`). See `read_geophys` for more
     details about geophysical indicies.
 
-    Usage
-    =====
+    Examples
+    ========
     from datetime import datetime
     from flipchem import Flipchem
 
