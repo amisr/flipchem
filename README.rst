@@ -49,7 +49,7 @@ And to make a profile of ion densities, one can try this::
     NOp = np.zeros((alts.shape))
     N2p = np.zeros((alts.shape))
     Np = np.zeros((alts.shape))
-    successes = np.zeros((alts.shape))
+    iters = np.zeros((alts.shape))
     
     for i,(alt,ne,te,ti) in enumerate(zip(alts,nes,tes,tis)):
         outputs = fc.get_point(glat,glon,alt,ne,te,ti)
@@ -58,7 +58,7 @@ And to make a profile of ion densities, one can try this::
         NOp[i] = outputs[5]
         N2p[i] = outputs[6]
         Np[i] = outputs[7]
-        successes[i] = outputs[-1]
+        iters[i] = outputs[-1]
     
     fig = pyplot.figure(figsize=(15,10))
     ax1 = fig.add_subplot(121)
