@@ -29,8 +29,7 @@ version = match[0].strip("'")
 if os.environ.get('READTHEDOCS', None) == 'True':
     from setuptools import setup
     from distutils.core import Extension
-    flipchem_ext = []
-    msis_ext = []
+    extensions = []
 else:
     # Check if we can even import numpy, if not, provide a more helpful
     # exception message to the user than what it typically provided.
@@ -62,6 +61,8 @@ else:
                     'src/nrlmsise00/nrlmsise-00_data.c']
     msis_ext = Extension(name = 'flipchem.ext._c_msis',
                          sources = msis_sources)
+    
+    extensions = [flipchem_ext,msis_ext]
 
 
 packages = find_packages(exclude=['contrib', 'docs', 'tests'])
@@ -130,7 +131,7 @@ if __name__ == "__main__":
         # https://packaging.python.org/en/latest/requirements.html
         install_requires=['numpy'],
 
-        ext_modules = [flipchem_ext,msis_ext],
+        ext_modules = extensions,
 
         # List additional groups of dependencies here (e.g. development
         # dependencies). You can install these using the following syntax,

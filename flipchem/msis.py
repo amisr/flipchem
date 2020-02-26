@@ -10,7 +10,7 @@ from datetime import datetime
 
 import numpy as np
 from flipchem import read_geophys
-import flipchem.ext._c_msis as _msis
+from flipchem.ext import _c_msis as _msis
 
 
 def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
