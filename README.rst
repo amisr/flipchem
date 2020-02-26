@@ -2,6 +2,9 @@ flipchem
 ========
 .. image:: https://travis-ci.com/amisr/flipchem.svg?branch=master
     :target: https://travis-ci.com/amisr/flipchem
+.. image:: https://readthedocs.org/projects/flipchem/badge/?version=latest
+    :target: https://flipchem.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 Overview
 --------
