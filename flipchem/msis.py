@@ -104,7 +104,7 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
 def compute_electron_neutral_collfreq(densities, Te):
     """
     This code calculates the elastic electron-neutral collision frequencies
-    following Chapter 4 of [1]_.
+    following Chapter 4 of [2]_.
 
     Parameters
     ==========
@@ -128,7 +128,7 @@ def compute_electron_neutral_collfreq(densities, Te):
     References
     ==========
 
-    .. [1] Schunk, R., & Nagy, A. (2000). Ionospheres: Physics, Plasma
+    .. [2] Schunk, R., & Nagy, A. (2000). Ionospheres: Physics, Plasma
            Physics, and Chemistry (Cambridge Atmospheric and Space Science
            Series). Cambridge: Cambridge University Press. 99-054707
            ISBN: 0 521 60770 1
@@ -152,7 +152,7 @@ def compute_electron_neutral_collfreq(densities, Te):
 class MSIS():
     """A python wrapper to the NRLMSISE-00 C library version of the code written
     by Dominik Brodowski, which is based on the original Fortran version of
-    the model. See [1]_.
+    the model. See [3]_.
 
     Parameters
     ==========
@@ -166,32 +166,34 @@ class MSIS():
     f107a : float
         The 81 day average F10.7 solar flux.
     ap : array_like
-        An array of AP index values. See `read_geophys`.
+        An array of AP index values. See :func:`read_geophys`.
 
     Notes
     =====
     This code automatically grabs the f10.7, f10.7a, and AP, are
-    required to run MSIS, from a local cache. See read_geophys
+    required to run MSIS, from a local cache. See :func:`read_geophys`
     for more details.
 
     Examples
     ========
-    from flipchem import MSIS
-    from datetime import datetime
+    ::
 
-    date = datetime(2017,1,4,2)
-    alt = 100
-    glat = 60
-    glon = -70
+        from flipchem import MSIS
+        from datetime import datetime
 
-    msis = MSIS(date)
-    outputs = msis.get_point(glat,glon,alt)
-    H,He,N,O,N2,O2,Ar,Mass,AnomO,Texo,Tn = outputs
+        date = datetime(2017,1,4,2)
+        alt = 100
+        glat = 60
+        glon = -70
+
+        msis = MSIS(date)
+        outputs = msis.get_point(glat,glon,alt)
+        H,He,N,O,N2,O2,Ar,Mass,AnomO,Texo,Tn = outputs
 
     References
     ==========
 
-    .. [1] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002).
+    .. [3] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002).
            NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons
            and scientific issues, J. Geophys. Res., 107(A12), 1468,
            doi:10.1029/2002JA009430. 

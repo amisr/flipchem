@@ -23,7 +23,7 @@ class Flipchem():
         Date and time for which to evaluate the flipchem model.
     altop : float, optional
         Altitude above which ion fractions are set to 100% O+. Only used by
-        the `get_point_fractions` function.
+        the :func:`get_point` with keyword `fractions=True`.
 
     Attributes
     ==========
@@ -32,30 +32,32 @@ class Flipchem():
     f107a : float
         The 81 day average F10.7 solar flux.
     ap : array_like
-        An array of AP index values. See `read_geophys`.
+        An array of AP index values. See :func:`read_geophys`.
 
     Notes
     =====
     flipchem requires an input neutral atmosphere and the geophysical
     indicies: f107 and f107a. NRLMSIS-00 is used to provide a neutral
-    atmosphere (see the :class:`flipchem.MSIS`). See `read_geophys` for more
+    atmosphere (see :class:`flipchem.MSIS`). See :func:`read_geophys` for more
     details about geophysical indicies.
 
     Examples
     ========
-    from datetime import datetime
-    from flipchem import Flipchem
+    ::
 
-    date = datetime(2017,1,4,2)
-    fc = Flipchem(date)
-
-    glat = 60
-    glon = -70
-    alt = 300
-    ne = 5.0e11
-    te = ti = 500.
-    outputs = fc.get_point_fractions(glat,glon,alt,ne,te,ti)
-    LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,ITERS = outputs
+        from datetime import datetime
+        from flipchem import Flipchem
+    
+        date = datetime(2017,1,4,2)
+        fc = Flipchem(date)
+    
+        glat = 60
+        glon = -70
+        alt = 300
+        ne = 5.0e11
+        te = ti = 500.
+        outputs = fc.get_point_fractions(glat,glon,alt,ne,te,ti)
+        LTHRS,SZAD,DEC,OXPLUS,O2PLUS,NOPLUS,N2PLUS,NPLUS,NNO,N2D,ITERS = outputs
 
     References
     ==========

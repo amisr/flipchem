@@ -37,33 +37,34 @@ def read_geophys(date):
     f107a : float
         An 81 day average of the F10.7 values
     ap : array_like
-        An array of AP values where each index in the array corresponds to::
-        0 : daily AP
-        1 : 3 hr AP index for current time
-        2 : 3 hr AP index for 3 hrs before current time
-        3 : 3 hr AP index for 6 hrs before current time
-        4 : 3 hr AP index for 9 hrs before current time
-        5 : Average of eight 3 hr AP indicies from 12 to 33 hrs 
-                prior to current time
-        6 : Average of eight 3 hr AP indicies from 36 to 57 hrs 
-                prior to current time 
+        An array of AP values where each index in the array corresponds to:
+            * 0 : daily AP
+            * 1 : 3 hr AP index for current time
+            * 2 : 3 hr AP index for 3 hrs before current time
+            * 3 : 3 hr AP index for 6 hrs before current time
+            * 4 : 3 hr AP index for 9 hrs before current time
+            * 5 : Average of eight 3 hr AP indicies from 12 to 33 hrs prior to current time
+            * 6 : Average of eight 3 hr AP indicies from 36 to 57 hrs prior to current time 
     
     Notes
     =====
     Each file in the directory of files is expected to have the following
-    structure:
+    structure::
 
-    1901012529 81013271720 3 0 7 97  4  5 12  6  7  2  0  3  50.21---069.50
-    1901022529 9 0 0 0 0 3 3 0 0  7  0  0  0  0  2  2  0  0  00.00---072.70
-    19010325291010 0 0 3 3 0 0 3 20  4  0  0  2  2  0  0  2  10.00---070.20
+        1901012529 81013271720 3 0 7 97  4  5 12  6  7  2  0  3  50.21---069.50
+        1901022529 9 0 0 0 0 3 3 0 0  7  0  0  0  0  2  2  0  0  00.00---072.70
+        19010325291010 0 0 3 3 0 0 3 20  4  0  0  2  2  0  0  2  10.00---070.20
+        
     etc.
 
     Examples
     ========
-    from datetime import datetime
-    import flipchem
+    ::
 
-    f107, f107a, ap = flipchem.read_geophys(datetime(2017,1,4,2))
+        from datetime import datetime
+        import flipchem
+
+        f107, f107a, ap = flipchem.read_geophys(datetime(2017,1,4,2))
 
 
     """
@@ -221,8 +222,10 @@ def update_geophys(year=None,base_url='https://amisr.com/geophys_params/'):
 
     Examples
     ========
-    import flipchem
-    flipchem.update_geophys(2020)
+    ::
+
+        import flipchem
+        flipchem.update_geophys(2020)
 
     """
 
