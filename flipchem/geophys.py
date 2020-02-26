@@ -22,7 +22,7 @@ GEOPHYSDIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),'dat')
 # Daily updated "geophys_params" files are provided
 # at: https://amisr.com/geophys_params/
 def read_geophys(date):
-    """Parses a directory of files, expecting one file per year. See `Notes~
+    """Parses a directory of files, expecting one file per year. See `Notes`
     for file structure.
 
     Parameters
