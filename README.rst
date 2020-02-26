@@ -28,7 +28,7 @@ Then, installation of `flipchem` can be accomplished using `pip`::
 
     pip install git+https://github.com/amisr/flipchem.git@v2020.2.0
 
-And to make a profile of ion densities, one can try this:
+And to make a profile of ion densities, one can try this::
 
     date = datetime(2017,1,4,18)
     fc = flipchem.Flipchem(date)
