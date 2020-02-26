@@ -53,6 +53,7 @@ __version__ = match[0].strip("'")
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
 ]

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """A setuptools based setup module.
 
 See:
@@ -10,16 +11,6 @@ import os
 import re
 from codecs import open
 from setuptools import find_packages
-# -*- coding: utf-8 -*-
-# Check if we can even import numpy, if not, provide a more helpful
-# exception message to the user than what it typically provided.
-try:
-    from numpy.distutils.core import setup, Extension
-except ImportError as e:
-    text = "There was a problem importing numpy. Do you have it installed?"
-    text += "\nImportError Exception:\n%s" % str(e)
-    raise Exception(text)
-
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -34,27 +25,43 @@ with open(os.path.join(here,'flipchem/__init__.py'),'r', encoding='utf-8') as f:
 match = re.findall(regex,text)
 version = match[0].strip("'")
 
-# Use mingw32 by default on windows
-if os.name == 'nt':
-    sfn = os.path.join(os.path.dirname(__file__), 'setup.cfg')
-    with open(sfn, 'w') as f:
-        f.write("\n[build_ext]\ncompiler = mingw32")
+# Include extensions only when not on readthedocs.org
+if os.environ.get('READTHEDOCS', None) == 'True':
+    from setuptools import setup
+    from distutils.core import Extension
+    flipchem_ext = []
+    msis_ext = []
+else:
+    # Check if we can even import numpy, if not, provide a more helpful
+    # exception message to the user than what it typically provided.
+    try:
+        from numpy.distutils.core import setup, Extension
+    except ImportError as e:
+        text = "There was a problem importing numpy. Do you have it installed?"
+        text += "\nImportError Exception:\n%s" % str(e)
+        raise Exception(text)
 
-# FLIPCHEM EXTENSION
-flipchem_sources = ["src/flipchem/flipchem.pyf",
-                    "src/flipchem/flipchem.f"]
-flipchem_ext = Extension(name = 'flipchem.ext._f_flipchem',
-                         sources = flipchem_sources,
-                         extra_f90_compile_args=['--std=legacy','-finit-local-zero','-fno-automatic'],
-                         extra_f77_compile_args=['--std=legacy','-finit-local-zero','-fno-automatic'],
-                         )
+    # Use mingw32 by default on windows
+    if os.name == 'nt':
+        sfn = os.path.join(os.path.dirname(__file__), 'setup.cfg')
+        with open(sfn, 'w') as f:
+            f.write("\n[build_ext]\ncompiler = mingw32")
 
-# MSIS EXTENSION
-msis_sources = ['src/nrlmsise00/_swigmsis_wrap.c',
-                'src/nrlmsise00/nrlmsise-00.c',
-                'src/nrlmsise00/nrlmsise-00_data.c']
-msis_ext = Extension(name = 'flipchem.ext._c_msis',
-                     sources = msis_sources)
+    # FLIPCHEM EXTENSION
+    flipchem_sources = ["src/flipchem/flipchem.pyf",
+                        "src/flipchem/flipchem.f"]
+    flipchem_ext = Extension(name = 'flipchem.ext._f_flipchem',
+                             sources = flipchem_sources,
+                             extra_f90_compile_args=['--std=legacy','-finit-local-zero','-fno-automatic'],
+                             extra_f77_compile_args=['--std=legacy','-finit-local-zero','-fno-automatic'],
+                             )
+
+    # MSIS EXTENSION
+    msis_sources = ['src/nrlmsise00/_swigmsis_wrap.c',
+                    'src/nrlmsise00/nrlmsise-00.c',
+                    'src/nrlmsise00/nrlmsise-00_data.c']
+    msis_ext = Extension(name = 'flipchem.ext._c_msis',
+                         sources = msis_sources)
 
 
 packages = find_packages(exclude=['contrib', 'docs', 'tests'])
