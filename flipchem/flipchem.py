@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-    Based on code written by Mike Nicolls in 2007?
+# Based on code written by Mike Nicolls in 2007?
+# Modified and documented: Ashton S. Reimer 2020
 
-    Modified and documented: Ashton S. Reimer 2020
-
-"""
 from __future__ import division, absolute_import, print_function
 
 from datetime import datetime

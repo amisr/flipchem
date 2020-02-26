@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-    Based on code written by Mike Nicolls in 2007?
+# Based on code written by Mike Nicolls in 2007?
+# Modified and documented: Ashton S. Reimer 2020
 
-    Modified and documented: Ashton Reimer 2019
-
-    Compatible with python2.7 and python3
-
-"""
 from __future__ import division, absolute_import, print_function
 
 import os
