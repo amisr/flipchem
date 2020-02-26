@@ -202,7 +202,7 @@ def _download_year(year,base_url=None):
 # update geophysical parameter files
 def update_geophys(year=None,base_url='https://amisr.com/geophys_params/'):
     """This function downloads geophysical parameter files from the default
-    url: %s
+    url.
 
     Parameters
     ==========
@@ -224,8 +224,7 @@ def update_geophys(year=None,base_url='https://amisr.com/geophys_params/'):
     import flipchem
     flipchem.update_geophys(2020)
 
-
-    """ % (base_url)
+    """
 
     # current year
     cur_year = datetime.now().year
