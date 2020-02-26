@@ -12,7 +12,7 @@ python:
   install:
      - method: pip
        path: .
-     - requirements: requirements
+     - requirements: requirements.txt
   system_packages: true
 
 sphinx:
