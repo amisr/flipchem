@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-    Based on code written by Mike Nicolls in 2007?
+# Based on code written by Mike Nicolls in 2007?
+# Modified and documented: Ashton S. Reimer 2020
 
-    Modified and documented: Ashton Reimer 2019
-
-    Compatible with python2.7 and python3
-
-"""
 from __future__ import division, absolute_import, print_function
 
 import os
@@ -21,39 +16,50 @@ except:
     # python 2
     from urllib import urlopen
 
-
 GEOPHYSDIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),'dat')
 
 # Reads geophysical indicies from an ASCII file
 # Daily updated "geophys_params" files are provided
 # at: https://amisr.com/geophys_params/
 def read_geophys(date):
-    """
-    This function parses a directory of files, expecting one
-    file per year. Each file is expected to have the following
-    structure:
+    """Parses a directory of files, expecting one file per year. See `Notes`
+    for file structure.
 
-    1901012529 81013271720 3 0 7 97  4  5 12  6  7  2  0  3  50.21---069.50
-    1901022529 9 0 0 0 0 3 3 0 0  7  0  0  0  0  2  2  0  0  00.00---072.70
-    19010325291010 0 0 3 3 0 0 3 20  4  0  0  2  2  0  0  2  10.00---070.20
+    Parameters
+    ==========
+    date : :class:`datetime.datetime`
+        Date and time for which to read geophysical parameters
+
+    Returns
+    =======
+    f107 : float
+        F10.7 for the previous day
+    f107a : float
+        An 81 day average of the F10.7 values
+    ap : array_like
+        An array of AP values where each index in the array corresponds to:
+            * 0 : daily AP
+            * 1 : 3 hr AP index for current time
+            * 2 : 3 hr AP index for 3 hrs before current time
+            * 3 : 3 hr AP index for 6 hrs before current time
+            * 4 : 3 hr AP index for 9 hrs before current time
+            * 5 : Average of eight 3 hr AP indicies from 12 to 33 hrs prior to current time
+            * 6 : Average of eight 3 hr AP indicies from 36 to 57 hrs prior to current time 
+    
+    Notes
+    =====
+    Each file in the directory of files is expected to have the following
+    structure::
+
+        1901012529 81013271720 3 0 7 97  4  5 12  6  7  2  0  3  50.21---069.50
+        1901022529 9 0 0 0 0 3 3 0 0  7  0  0  0  0  2  2  0  0  00.00---072.70
+        19010325291010 0 0 3 3 0 0 3 20  4  0  0  2  2  0  0  2  10.00---070.20
+        
     etc.
-    
-    For a given datetime object, this function returns:
-        F107 - for previous day
-        F107a - 81 day average
-        AP - Array containing the following magnetic values:
-            *   0 : daily AP
-            *   1 : 3 hr AP index for current time
-            *   2 : 3 hr AP index for 3 hrs before current time
-            *   3 : 3 hr AP index for 6 hrs before current time
-            *   4 : 3 hr AP index for 9 hrs before current time
-            *   5 : Average of eight 3 hr AP indicies from 12 to 33 hrs 
-            *           prior to current time
-            *   6 : Average of eight 3 hr AP indicies from 36 to 57 hrs 
-            *           prior to current time 
-    
 
-    Example Usage:
+    Examples
+    ========
+    ::
 
         from datetime import datetime
         import flipchem
@@ -196,20 +202,32 @@ def _download_year(year,base_url=None):
 
 # update geophysical parameter files
 def update_geophys(year=None,base_url='https://amisr.com/geophys_params/'):
-    """
-    This function downloads geophysical parameter files from the default
-    url: %s
+    """This function downloads geophysical parameter files from the default
+    url.
+
+    Parameters
+    ==========
+    year : int, optional
+        The year for which to download a geophysical parameter file. If
+        year is None, all files are downloaded.
+
+    base_url : str, optional
+        The URL at which the geophysical parameter files are hosted.
+
+    Notes
+    =====
 
     The files are updated on a daily basis, so it is important to update
     the local copy of these files on a regular basis.
 
-    Example Usage:
+    Examples
+    ========
+    ::
 
         import flipchem
         flipchem.update_geophys(2020)
 
-
-    """ % (base_url)
+    """
 
     # current year
     cur_year = datetime.now().year
