@@ -29,7 +29,7 @@ Since this package is a wrapper around both C and Fortran source code, one must 
 
 Then, installation of `flipchem` can be accomplished using `pip`::
 
-    pip install git+https://github.com/amisr/flipchem.git@v2020.2.0
+    pip install git+https://github.com/amisr/flipchem.git@v2020.2.1
 
 And to make a profile of ion densities, one can try this::
 

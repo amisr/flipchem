@@ -75,7 +75,7 @@ source_suffix = '.rst'
 source_encoding = 'utf-8'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = 'readme'
 
 # General information about the project.
 project = u'AMISR'
@@ -267,7 +267,7 @@ html_theme_options = {
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'backscatterdoc'
+htmlhelp_basename = 'flipchemdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
