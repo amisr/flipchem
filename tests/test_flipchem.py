@@ -51,6 +51,27 @@ def test_Flipchem_fractions():
         else:
             assert(expected[i] == approx(outputs[i],nan_ok=True))
 
+def test_Flipchem_altop():
+    from flipchem import Flipchem
+
+    expected = (3.273433208465576,133.14190201943407,-22.97288535821079,
+                5.0e11,0,0,0,0,0,0,0)
+
+    date = datetime(2018,1,1,2)
+    fc = Flipchem(date,altop=150.0)
+
+    glat = 70
+    glon = 20
+    alt = 200
+    ne = 5.0e11
+    te = ti = 500
+    outputs = fc.get_point(glat,glon,alt,ne,te,ti)
+    for i in range(len(expected)):
+        if isinstance(expected[i],bool):
+            assert(expected[i] == outputs[i])
+        else:
+            assert(expected[i] == approx(outputs[i],nan_ok=True))
+
 def test_Flipchem_profile():
     from datetime import datetime
     import numpy as np
