@@ -146,7 +146,10 @@ class Flipchem():
             NOPLUS = 0.0
             N2PLUS = 0.0
             NPLUS = 0.0
-            lthrs,szad,dec = self._call_getltsza(date,lat,lon)
+            NNO = 0.0
+            N2D = 0.0
+            ITERS = 0
+            lthrs,szad,dec = self._call_getltsza(self.date,glat,glon)
 
         else:
 

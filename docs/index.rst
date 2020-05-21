@@ -1,3 +1,5 @@
+.. include:: ../README.rst
+
 ========
 Contents
 ========
@@ -5,7 +7,6 @@ Contents
 .. toctree::
    :maxdepth: 3
 
-   readme
    installation/index
    usage
    reference/index

@@ -267,7 +267,7 @@ html_theme_options = {
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'backscatterdoc'
+htmlhelp_basename = 'flipchemdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
