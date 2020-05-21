@@ -224,7 +224,7 @@ class Flipchem():
         utsecs = curtime * 3600.0
         yyyyddd = year*1000 + doy
         
-        lthrs,sza,dec = _getltsza(yyyyddd,utsecs,lat,lon)
+        lthrs,sza,dec = _getltsza(yyyyddd,utsecs,lat*np.pi/180.0,lon)
 
         # convert to degrees
         szad = sza*180.0/np.pi
