@@ -67,7 +67,7 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     Oconst  = 9.0841307137989e-15
     N2const = 1.8168261427597804e-14
     O2const = 1.8518806819759527e-14
-    Arconst = 4.291797148e-14
+    Arconst = 4.291797148e-14 # From 10.1103/PhysRevLett.120.123203
 
     # define some other constants
     Tr = (Tn + Ti) / 2.0
