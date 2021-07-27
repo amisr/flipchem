@@ -62,7 +62,7 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     #    n_in = const * n_n / sqrt(m_i*(m_i+m_n))
     # for each ion. Here's the constants for H+, He+, N+, O+, N2+, and O2+:
     Hconst  = 2.118436361550408e-15
-    Heconst = 4.796838917e-15 #old value: 2.372016271579909e-15 # assuming 100% He-4
+    Heconst = 4.796838917e-15 # From 10.1103/PhysRevLett.120.123203
     Nconst  = 1.0293931179488746e-14
     Oconst  = 9.0841307137989e-15
     N2const = 1.8168261427597804e-14
