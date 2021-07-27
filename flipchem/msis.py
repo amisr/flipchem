@@ -60,7 +60,7 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     # then, taking the values for gamma in table 4.1 and the amu for the 
     # neutrals, we can get an equation that is:
     #    n_in = const * n_n / sqrt(m_i*(m_i+m_n))
-    # for each ion. Here's the constants for H+, He+, N+, O+, N2+, and O2+:
+    # for each ion-neutral pair. Here's the constants for H, He, N, O, N2, O2 and Ar:
     Hconst  = 2.118436361550408e-15
     Heconst = 4.796838917e-15 # From 10.1103/PhysRevLett.120.123203
     Nconst  = 1.0293931179488746e-14
