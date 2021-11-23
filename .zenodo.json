@@ -1,0 +1,29 @@
+{
+  "license": {
+  "id": "GPL-v3.0"
+  }, 
+  "notes": "When referencing this package, please cite the package DOI, the MSIS journal article (doi:10.1029/2002JA009430), and the Ion Density Calculator journal article (doi:10.1029/2009RS004332).",
+  "references": [
+    "Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002). NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons and scientific issues, J. Geophys. Res., 107(A12), 1468, doi:10.1029/2002JA009430.",
+    "Richards, P. G., Bilitza, D., and Voglozin, D. (2010), Ion density calculator (IDC): A new efficient model of ionospheric ion densities, Radio Sci., 45, RS5007, doi:10.1029/2009RS004332."
+  ], 
+  "keywords": [
+    "Ion Density Calculator",
+    "FLIP",
+    "MSIS",
+    "Ionosphere",
+    "Neutral Atmosphere",
+    "Ion-neutral Collisions",
+    "Space Physics",
+    "Heliophysics"
+  ], 
+  "creators": [
+    {
+      "orcid": "0000-0002-4621-3453",
+      "name": "Ashton S. Reimer"
+    },
+    {
+      "name": "Florian Guenzkofer"
+    }
+  ]
+}
