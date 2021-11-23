@@ -91,7 +91,7 @@ And there is code available with the MSIS wrapper that provides ion-neutral and 
     ion_masses = [14.0,16.0,28.0,30.0,32.0]
     Te = Ti = 1000.0
     nu_in = list()
-    neutral_densities = (H,He,N,O,N2,O2)
+    neutral_densities = (H,He,N,O,N2,O2,Ar)
     for mass in ion_masses:
         nu_in.append(compute_ion_neutral_collfreq(neutral_densities, Tn, mass, Ti))
     nu_en = compute_electron_neutral_collfreq(neutral_densities, Te)
@@ -99,6 +99,6 @@ And there is code available with the MSIS wrapper that provides ion-neutral and 
 Example Jupyter Notebook
 -------------------------
 
-Do you prefer working in jupyter notebooks? `Here you can find an example notebook that shows how to get altitude profiles of ion densities <https://nbviewer.jupyter.org/github/amisr/flipchem/blob/v2020.2.2/notebooks/usage_examples.ipynb>`_.
+Do you prefer working in jupyter notebooks? `Here you can find an example notebook that shows how to get altitude profiles of ion densities <https://nbviewer.jupyter.org/github/amisr/flipchem/blob/v2021.2.2/notebooks/usage_examples.ipynb>`_.
 
 Is there an example missing that you would like to see? Feel free to suggest one!

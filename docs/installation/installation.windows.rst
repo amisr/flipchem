@@ -45,7 +45,7 @@ Installing flipchem
 
 Now you can install flipchem to the same python environment using `pip`::
 
-    pip install git+https://github.com/amisr/flipchem.git@v2020.2.1
+    pip install git+https://github.com/amisr/flipchem.git@v2021.2.2
 
 If `pip` isn't installed, you can install it using `conda`::
 
