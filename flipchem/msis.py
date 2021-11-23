@@ -12,7 +12,7 @@ from flipchem.ext import _c_msis as _msis
 
 def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     """This code calculates the elastic and resonant ion-neutral collision
-    frequencies following Chapter 4 of [1]_.
+    frequencies following Chapter 4 of [1]_. Uses Argon and Helium from [2]_.
 
     Parameters
     ==========
@@ -159,7 +159,7 @@ def compute_electron_neutral_collfreq(densities, Te):
 class MSIS():
     """A python wrapper to the NRLMSISE-00 C library version of the code written
     by Dominik Brodowski, which is based on the original Fortran version of
-    the model. See [3]_.
+    the model. See [4]_.
 
     Parameters
     ==========
@@ -200,7 +200,7 @@ class MSIS():
     References
     ==========
 
-    .. [3] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002).
+    .. [4] Picone, J. M., Hedin, A. E., Drob, D. P., and Aikin, A. C. (2002).
            NRLMSISE‐00 empirical model of the atmosphere: Statistical comparisons
            and scientific issues, J. Geophys. Res., 107(A12), 1468,
            doi:10.1029/2002JA009430. 
