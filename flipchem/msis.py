@@ -17,7 +17,7 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     Parameters
     ==========
     densities : array_like
-        An array of neutral densities in this order: H, He, N, O, N2, O2 with
+        An array of neutral densities in this order: H, He, N, O, N2, O2, Ar with
         units of number per cubic meter.
     Tn : float
         The mean neutral temperature in Kelvin
@@ -30,7 +30,7 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     =======
     nu_in : float
         The the total ion-neutral collision frequency summed over the
-        collisions between the input ion and H, He, N, O, N2, O2
+        collisions between the input ion and H, He, N, O, N2, O2, Ar
 
     References
     ==========
@@ -39,7 +39,10 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
            Physics, and Chemistry (Cambridge Atmospheric and Space Science
            Series). Cambridge: Cambridge University Press. 99-054707
            ISBN: 0 521 60770 1
-
+    .. [2] Gaiser C, Fellmuth B. Polarizability of Helium, Neon, and Argon: 
+           New Perspectives for Gas Metrology. Phys Rev Lett. 2018 Mar 23;
+           120(12):123203. doi: 10.1103/PhysRevLett.120.123203. 
+            
     """
     # set the ion temperature if None
     if Ti is None:
@@ -57,13 +60,14 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     # then, taking the values for gamma in table 4.1 and the amu for the 
     # neutrals, we can get an equation that is:
     #    n_in = const * n_n / sqrt(m_i*(m_i+m_n))
-    # for each ion. Here's the constants for H+, He+, N+, O+, N2+, and O2+:
+    # for each ion-neutral pair. Here's the constants for H, He, N, O, N2, O2 and Ar:
     Hconst  = 2.118436361550408e-15
-    Heconst = 2.372016271579909e-15 # assuming 100% He-4
+    Heconst = 4.796838917e-15 # From 10.1103/PhysRevLett.120.123203
     Nconst  = 1.0293931179488746e-14
     Oconst  = 9.0841307137989e-15
     N2const = 1.8168261427597804e-14
     O2const = 1.8518806819759527e-14
+    Arconst = 4.291797148e-14 # From 10.1103/PhysRevLett.120.123203
 
     # define some other constants
     Tr = (Tn + Ti) / 2.0
@@ -74,14 +78,16 @@ def compute_ion_neutral_collfreq(densities, Tn, mi, Ti=None):
     nu_in = 0.0
 
     # H, no resonant because we don't include H+ in ISR fitting
-    nu_in += densities[0] * Hconst / np.sqrt(mi * (mi + 16.0))
+    nu_in += densities[0] * Hconst / np.sqrt(mi * (mi + 1.0))
     # He, no resonant because we don't include He+ in ISR fitting
-    nu_in += densities[1] * Heconst / np.sqrt(mi * (mi + 16.0))
+    nu_in += densities[1] * Heconst / np.sqrt(mi * (mi + 4.0))
+    # Ar, no resonant because we don't include Ar+ in ISR fitting
+    nu_in += densities[6] * Arconst / np.sqrt(mi * (mi + 40.0))
     # N
     if mi == 14.0:
         nu_in += 1.0e-6 * densities[2] * 3.83e-11 * sqrtTr * (1.0 - 0.063 * log10Tr)**2.0
     else:
-        nu_in += densities[2]* Nconst / np.sqrt(mi * (mi + 16.0))
+        nu_in += densities[2]* Nconst / np.sqrt(mi * (mi + 14.0))
     # O
     if mi == 16.0:
         nu_in += 1.0e-6 * densities[3] * 3.67e-11 * sqrtTr * (1.0 - 0.064 * log10Tr)**2.0
