@@ -1,0 +1,5 @@
+__version__ = "2021.2.2"
+__author__ = "Pablo Reyes"
+__email__ = "pablo.reyes@sri.com"
+__summary__ = "flipchem provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards"
+__uri__ = "https://github.com/amisr/flipchem"
