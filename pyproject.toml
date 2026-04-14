@@ -15,7 +15,7 @@ readme = "README.rst"
 requires-python = ">=3.8"
 license = "MIT"
 keywords = ["flipchem"]
-mainteiners = [
+maintainers = [
   { name = "Pablo Reyes", email = "pablo.reyes@sri.com" },
 ]
 classifiers = [
@@ -37,23 +37,24 @@ Documentation = "https://github.com/amisr/flipchem#readme"
 Issues = "https://github.com/amisr/flipchem/issues"
 Source = "https://github.com/amisr/flipchem"
 
-[project.scripts]
-flipchem = 'flipchem.__main__:main'
+#[project.scripts]
+#flipchem = 'flipchem.__main__:main'
 
-[tool.coverage.run]
-source_pkgs = ["flipchem", "tests"]
-branch = true
-relative_files = true
-include = "*/site-packages/flipchem/*"
-parallel = true
-omit = [
-  "src/flipchem/__about__.py",
-]
+#[tool.coverage.run]
+#source_pkgs = ["flipchem", "tests"]
+#branch = true
+#relative_files = true
+#include = "*/site-packages/flipchem/*"
+#parallel = true
+#omit = [
+#  "src/flipchem/__about__.py",
+#]
 
-[tool.coverage.paths]
-flipchem = ["src/flipchem", "*/flipchem/src/flipchem"]
-tests = ["tests", "*/flipchem/tests"]
+#[tool.coverage.paths]
+#flipchem = ["src/flipchem", "*/flipchem/src/flipchem"]
+#tests = ["tests", "*/flipchem/tests"]
 
-[tool.coverage.report]
-show_missing = true
-precision = 2
+
+#[tool.coverage.report]
+#show_missing = true
+#precision = 2
