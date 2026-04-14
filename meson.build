@@ -175,11 +175,11 @@ py3.extension_module('_c_msis',
 		    install : true
 		    )
 
+list_cmd = run_command('sh', '-c', 'ls flipchem/*.py', check: true)
+python_files = list_cmd.stdout().strip().split('\n')
+
 py3.install_sources(
-  'flipchem/__init__.py',
-  'flipchem/flipchem.py',
-  'flipchem/geophys.py',
-  'flipchem/msis.py',
+  python_files,
   subdir: 'flipchem'
 )
 
