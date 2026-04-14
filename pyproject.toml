@@ -1,17 +1,22 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = [
+    "wheel",
+    "meson-python", 
+    "numpy", 
+     "meson", 
+     "ninja"]
+build-backend = "mesonpy"
 
 [project]
 name = "flipchem"
-dynamic = ["version"]
+version = "2021.2.1"
 description = 'flipchem provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards, e.g. Richards2011'
-readme = "README.md"
+readme = "README.rst"
 requires-python = ">=3.8"
 license = "MIT"
-keywords = []
-authors = [
-  { name = "U.N. Owen", email = "void@some.where" },
+keywords = ["flipchem"]
+mainteiners = [
+  { name = "Pablo Reyes", email = "pablo.reyes@sri.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -25,26 +30,21 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = ["numpy"]
 
 [project.urls]
-Documentation = "https://github.com/U.N. Owen/flipchem#readme"
-Issues = "https://github.com/U.N. Owen/flipchem/issues"
-Source = "https://github.com/U.N. Owen/flipchem"
+Documentation = "https://github.com/amisr/flipchem#readme"
+Issues = "https://github.com/amisr/flipchem/issues"
+Source = "https://github.com/amisr/flipchem"
 
-[tool.hatch.version]
-path = "src/flipchem/__about__.py"
-
-[tool.hatch.envs.types]
-extra-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/flipchem tests}"
+[project.scripts]
+flipchem = 'flipchem.__main__:main'
 
 [tool.coverage.run]
 source_pkgs = ["flipchem", "tests"]
 branch = true
+relative_files = true
+include = "*/site-packages/flipchem/*"
 parallel = true
 omit = [
   "src/flipchem/__about__.py",
@@ -55,8 +55,5 @@ flipchem = ["src/flipchem", "*/flipchem/src/flipchem"]
 tests = ["tests", "*/flipchem/tests"]
 
 [tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
+show_missing = true
+precision = 2
