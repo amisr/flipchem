@@ -183,6 +183,11 @@ py3.install_sources(
   subdir: 'flipchem'
 )
 
+py3.install_sources(
+  'flipchem/ext/__init__.py',
+  subdir: 'flipchem/ext'
+)
+
 install_subdir('flipchem/dat',
   install_dir : py3.get_install_dir() / 'flipchem',
   strip_directory: false  # 'false' keeps the folder 'my_data' itself
