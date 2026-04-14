@@ -175,6 +175,14 @@ py3.extension_module('_c_msis',
 		    install : true
 		    )
 
+py3.install_sources(
+  'flipchem/__init__.py',
+  'flipchem/flipchem.py',
+  'flipchem/geophys.py',
+  'flipchem/msis.py',
+  subdir: 'flipchem'
+)
+
 install_subdir('flipchem/dat',
   install_dir : py3.get_install_dir() / 'flipchem',
   strip_directory: false  # 'false' keeps the folder 'my_data' itself
