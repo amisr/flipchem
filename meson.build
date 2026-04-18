@@ -1,0 +1,194 @@
+project('flipchem', 'c',
+    version : '2026.1.0',
+    license: 'MIT',
+    default_options : [
+      'buildtype=debugoptimized',
+      'c_args=-Wno-unused-function -Wno-conversion -Wno-misleading-indentation -Wno-incompatible-pointer-types',
+          'fortran_args=-Wno-conversion',  # silence "conversion from REAL(8) to INTEGER(4)"
+	      'fortran_std=legacy',
+      'warning_level=2'])
+
+# Adding at project level causes many spurious -lgfortran flags.
+add_languages('fortran', native: false)
+
+add_project_arguments('--std=legacy','-finit-local-zero','-fno-automatic', language: 'fortran')
+fc = meson.get_compiler('fortran')
+cc = meson.get_compiler('c')
+
+py_mod =  import('python')
+py3 = py_mod.find_installation(pure: false)
+py3_dep = py3.dependency()
+message(py3.full_path())
+message(py3.get_install_dir())
+
+
+# Determine whether this is being compiled with numpy 1.X or 2.X
+numpy_ver = run_command(py3,
+    ['-c', 'import numpy; print(numpy.__version__.split(".")[0])'],
+      check : true
+      ).stdout().strip()
+is_numpytwo = numpy_ver.to_int() >= 2
+
+message('The Numpy major version is: ', numpy_ver)
+
+if is_numpytwo
+  numpy_nodepr_api = '-DNPY_NO_DEPRECATED_API=NPY_2_0_API_VERSION'
+else
+    numpy_nodepr_api = '-DNPY_NO_DEPRECATED_API=NPY_1_9_API_VERSION'
+endif
+
+if cc.has_argument('-Wno-unused-but-set-variable')
+  add_global_arguments('-Wno-unused-but-set-variable', language : 'c')
+endif
+
+# For Fortran code, Meson already adds `-lm`.
+m_dep = cc.find_library('m', required : false)
+if m_dep.found()
+  add_project_link_arguments('-lm', language : 'c')
+endif
+
+# Add more link arguments
+add_project_link_arguments('-lquadmath', language: ['c', 'fortran'])
+
+# Get NumPy include directories for F2PY
+incdir_numpy = run_command(py3,
+  ['-c', 'import os; os.chdir(".."); import numpy; print(numpy.get_include())'],
+  check : true
+).stdout().strip()
+
+incdir_f2py = run_command(py3,
+  ['-c', 'import os; os.chdir(".."); from numpy import f2py; print(f2py.get_include())'],
+  check : true
+).stdout().strip()
+
+inc_dirs = include_directories(incdir_numpy, incdir_f2py)
+
+
+if is_numpytwo
+  c_flags = ['-DNPY_NO_DEPRECATED_API=NPY_2_0_API_VERSION']
+else
+  c_flags = ['-DNPY_NO_DEPRECATED_API=NPY_1_9_API_VERSION']
+endif
+
+# Platform detection to set more flags for Windows systems
+is_windows = host_machine.system() == 'windows'
+is_mac = host_machine.system() == 'darwin'
+is_mingw = is_windows and cc.get_id() == 'gcc'
+
+cython_c_args = []
+if is_windows
+  # For mingw-w64, link statically against the UCRT.
+  gcc_link_args = ['-lucrt', '-static']
+  if is_mingw
+    add_global_link_arguments(gcc_link_args, language: ['c'])
+
+    # Force gcc to float64 long doubles for compatibility with MSVC
+    # builds, for C only.
+    add_global_arguments('-mlong-double-64', language: 'c')
+
+    # Make fprintf("%zd") work (see https://github.com/rgommers/scipy/issues/118)
+    add_global_arguments('-D__USE_MINGW_ANSI_STDIO=1', language: ['c'])
+
+    # Manual add of MS_WIN64 macro when not using MSVC.
+    # https://bugs.python.org/issue28267
+    bitness = run_command('flipchempy/_gcc_build_bitness.py').stdout().strip()
+    if bitness == '64'
+      add_global_arguments('-DMS_WIN64', language: ['c', 'fortran'])
+    endif
+
+    # Silence warnings emitted by PyOS_snprintf for (%zd), see
+    # https://github.com/rgommers/scipy/issues/118.
+    # Use as c_args for extensions containing Cython code
+    cython_c_args += ['-Wno-format-extra-args', '-Wno-format']
+
+    # Windows may need the directory for Python.h added.  This location
+    # does not have the same name for all installs.  This is the one
+    # for Windows on GitHub actions
+    incdir_py = run_command(py3,
+      ['-c', 'import os; os.chdir(".."); import sys; print(os.path.join(sys.prefix, "include"))'],
+      check : true).stdout().strip()
+    inc_dirs = include_directories(incdir_numpy, incdir_f2py, incdir_py)
+  endif
+
+  if meson.get_compiler('fortran').get_id() == 'gcc'
+    add_global_link_arguments(gcc_link_args, language: ['fortran'])
+
+    # Flag needed to work around BLAS and LAPACK Gfortran dependence on
+    # undocumented C feature when passing single character string
+    # arguments.
+    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=90329
+    # https://github.com/wch/r-source/blob/838f9d5a7be08f2a8c08e47bcd28756f5d0aac90/src/gnuwin32/MkRules.rules#L121
+    add_global_arguments('-fno-optimize-sibling-calls',
+      language: ['fortran'])
+  endif
+elif is_mac
+  c_flags += ['-FALIGN_FUNCTIONS=8']
+endif
+
+# Check the python headers
+cc.check_header('Python.h', dependencies: [py3_dep], required: true)
+
+# Unlike distutils, meson doesn't yet include some of the f2py stuff
+fortranobject_c = incdir_f2py / 'fortranobject.c'
+
+fortranobject_lib = static_library('_fortranobject',
+  fortranobject_c,
+  c_args: c_flags,
+  dependencies: py3_dep,
+  include_directories: [incdir_numpy, incdir_f2py])
+
+fortranobject_dep = declare_dependency(
+  link_with: fortranobject_lib,
+  include_directories: [incdir_numpy, incdir_f2py])
+
+
+# Make a custom target, output should not contain a path segment.
+# The name 'fortranflipchem-f2pywrappers2.f90' is used because an empty
+# 'fortranflipchem-f2pywrappers.f' is also created, making the F90 wrapper the
+# second wrapper.  F2PY controls these names, so it may change at some point.
+f2py_source = custom_target(
+  'f2py_wrapper',
+   input : ['src/flipchem/flipchem.pyf',
+	     'src/flipchem/flipchem.f'],
+   output : ['_f_flipchemmodule.c','_f_flipchem-f2pywrappers.f'],
+   command : [py3, '-m', 'numpy.f2py', 
+              '@INPUT@', '-m', '_f_flipchem', '--lower', '--build-dir', '@OUTDIR@' ])
+
+# Declare the fortran extension module
+py3.extension_module('_f_flipchem',
+  sources :['src/flipchem/flipchem.f', f2py_source, fortranobject_c],
+  include_directories: inc_dirs,
+  link_with: fortranobject_lib,
+  dependencies : [py3_dep, fortranobject_dep],
+  subdir: 'flipchem/ext',
+  install : true)
+
+
+# MSIS EXTENSION
+msis_sources = ['src/nrlmsise00/_swigmsis_wrap.c',
+                'src/nrlmsise00/nrlmsise-00.c',
+                'src/nrlmsise00/nrlmsise-00_data.c']
+py3.extension_module('_c_msis',
+                    msis_sources,
+                    dependencies : [py3_dep],
+                    subdir: 'flipchem/ext',
+		    install : true
+		    )
+
+list_cmd = run_command('sh', '-c', 'ls flipchem/*.py', check: true)
+python_files = list_cmd.stdout().strip().split('\n')
+
+py3.install_sources(
+  python_files,
+  subdir: 'flipchem'
+)
+
+py3.install_sources(
+  'flipchem/ext/__init__.py',
+  subdir: 'flipchem/ext'
+)
+
+install_subdir('flipchem/dat',
+  install_dir : py3.get_install_dir() / 'flipchem',
+  strip_directory: false  # 'false' keeps the folder 'my_data' itself
+  )

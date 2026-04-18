@@ -1,0 +1,60 @@
+[build-system]
+requires = [
+    "wheel",
+    "meson-python", 
+    "numpy", 
+     "meson", 
+     "ninja"]
+build-backend = "mesonpy"
+
+[project]
+name = "flipchem"
+version = "2026.1.0"
+description = 'flipchem provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards, e.g. Richards2011'
+readme = "README.rst"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = ["flipchem"]
+maintainers = [
+  { name = "Pablo Reyes", email = "pablo.reyes@sri.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = ["numpy"]
+
+[project.urls]
+Documentation = "https://github.com/amisr/flipchem#readme"
+Issues = "https://github.com/amisr/flipchem/issues"
+Source = "https://github.com/amisr/flipchem"
+
+#[project.scripts]
+#flipchem = 'flipchem.__main__:main'
+
+#[tool.coverage.run]
+#source_pkgs = ["flipchem", "tests"]
+#branch = true
+#relative_files = true
+#include = "*/site-packages/flipchem/*"
+#parallel = true
+#omit = [
+#  "src/flipchem/__about__.py",
+#]
+
+#[tool.coverage.paths]
+#flipchem = ["src/flipchem", "*/flipchem/src/flipchem"]
+#tests = ["tests", "*/flipchem/tests"]
+
+
+#[tool.coverage.report]
+#show_missing = true
+#precision = 2
