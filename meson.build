@@ -1,5 +1,5 @@
 project('flipchem', 'c',
-    version : '2021.2.1',
+    version : '2026.1.0',
     license: 'MIT',
     default_options : [
       'buildtype=debugoptimized',

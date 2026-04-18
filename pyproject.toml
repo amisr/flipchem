@@ -9,7 +9,7 @@ build-backend = "mesonpy"
 
 [project]
 name = "flipchem"
-version = "2021.2.1"
+version = "2026.1.0"
 description = 'flipchem provides a python wrapper of the flipchem ionospheric photochemistry model developed by Phil Richards, e.g. Richards2011'
 readme = "README.rst"
 requires-python = ">=3.8"
