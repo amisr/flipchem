@@ -31,7 +31,7 @@ Since this package is a wrapper around both C and Fortran source code, one must 
 
 Then, installation of `flipchem` can be accomplished using `pip`::
 
-    pip install git+https://github.com/amisr/flipchem.git@v2020.2.1
+    pip install git+https://github.com/amisr/flipchem.git@v2026.1.0
 
 And to make a profile of ion densities, one can try this::
 
@@ -84,6 +84,23 @@ And to make a profile of ion densities, one can try this::
     ax2.plot(tis,alts,label='$T_i$')
     ax2.set_xlabel('Temperature (K)')
     l = ax2.legend()
+
+Installation Note
+-----------------
+For mac os, use homebrew to handle python version and gcc compilation tools. Once homebrew is installed follow its post-installation configuration, update and install compilation tools:
+
+    $ brew update
+    $ brew install python
+    $ brew install gcc
+    $ brew install gfortran
+
+Create a virtual environment to install the package. The usual prefix for homebrew is /opt/homebrew then:
+
+    $ /opt/homebrew/bin/python3 -m venv YOUR_ENV_PATH
+
+Once in the brew and the new python environment:
+
+    pip install git+https://github.com/amisr/flipchem.git@v2026.1.0
 
 Documentation
 -------------
