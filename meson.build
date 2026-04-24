@@ -47,8 +47,12 @@ if m_dep.found()
   add_project_link_arguments('-lm', language : 'c')
 endif
 
-# Add more link arguments
-add_project_link_arguments('-lquadmath', language: ['c', 'fortran'])
+cpu = host_machine.cpu_family()
+
+if cpu != 'aarch64'
+  # Add more link arguments
+  add_project_link_arguments('-lquadmath', language: ['c', 'fortran'])
+endif
 
 # Get NumPy include directories for F2PY
 incdir_numpy = run_command(py3,
